@@ -84,7 +84,7 @@ export default Carousel = ({ navigation }) => {
         text={currentIndex == data.length - 1 ? "Sign Up" : "Next"}
         onPress={
           currentIndex == data.length - 1
-            ? () => navigation.navigate("Login")
+            ? () => navigation.navigate("Register")
             : goToNextSlide
         }
       />

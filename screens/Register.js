@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LOGO from "../images/logo.png";
+import LOGO from "../assets/a4ae5c3b15fa791bb4a5b4e91544fdea.png";
 import {
   StyleSheet,
   TouchableOpacity,
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignSelf: "center",
     marginTop: 20,
-    marginBottom:20
+    marginBottom: 20,
   },
   buttonText: {
     fontSize: 20,

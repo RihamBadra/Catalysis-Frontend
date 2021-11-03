@@ -1,60 +1,126 @@
-import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import LOGO from "../assets/a4ae5c3b15fa791bb4a5b4e91544fdea.png";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  Text,
+  TextInput,
+  View,
+  Image,
+} from "react-native";
+import { AppStyles } from "../AppStyles";
 
-export default function Login({ navigation }) {
+const Register = (props) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <View style={styles.container}>
-      <View style={styles.container1}>
-        <View style={styles.container0}></View>
-      </View>
-      <View style={styles.container2}>
-        <View style={styles.text1}></View>
-        <View style={styles.text2}></View>
-      </View>
+      <ScrollView>
+        <Image style={styles.img} source={LOGO} />
+        <Text style={[styles.title, styles.leftTitle]}>Login</Text>
+        <View style={styles.InputContainer}>
+          <TextInput
+            style={styles.body}
+            placeholder="E-mail Address"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            placeholderTextColor={AppStyles.color.grey}
+            underlineColorAndroid="transparent"
+          />
+        </View>
+        <View style={styles.InputContainer}>
+          <TextInput
+            style={styles.body}
+            placeholder="Password"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            placeholderTextColor={AppStyles.color.grey}
+            underlineColorAndroid="transparent"
+          />
+        </View>
+        <TouchableOpacity
+          onPress={() => alert("Successfully!")}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Sign Up</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
-}
+};
+
+export default Register;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
   },
   container1: {
     flex: 1,
-    // justifyContent: "center",
-    // alignItems: "center",
-    padding: 50,
-    borderColor: "black",
-    borderWidth: 1,
   },
-  container2: {
-    flex: 1,
-    // padding: 50,
-    flexDirection: "row",
-    // justifyContent: "space-between",
-    alignItems: "flex-end",
-    borderColor: "black",
-    borderWidth: 1,
-  },
-  text1: {
-    flex: 1,
-    aspectRatio: 1,
-    backgroundColor: "blue",
-  },
-  text2: {
+  img: {
     flex: 2,
-    aspectRatio: 1,
-    backgroundColor: "red",
+    resizeMode: "contain",
+    marginTop: 30,
   },
-  container0: {
+  title: {
     flex: 1,
-    // width: 50,
-    aspectRatio: 1,
-    backgroundColor: "green",
-    borderColor: "black",
+    fontSize: AppStyles.fontSize.title,
+    fontWeight: "bold",
+    color: "#004E96",
+  },
+  leftTitle: {
+    alignSelf: "stretch",
+    textAlign: "center",
+    marginLeft: 20,
+  },
+  content: {
+    paddingLeft: 50,
+    paddingRight: 50,
+    textAlign: "center",
+    fontSize: AppStyles.fontSize.content,
+    color: AppStyles.color.text,
+  },
+  loginContainer: {
+    width: AppStyles.buttonWidth.main,
+    backgroundColor: AppStyles.color.tint,
+    borderRadius: AppStyles.borderRadius.main,
+    padding: 10,
+    marginTop: 30,
+  },
+  loginText: {
+    color: AppStyles.color.white,
+  },
+  placeholder: {
+    color: "red",
+  },
+  InputContainer: {
+    width: AppStyles.textInputWidth.main,
+    marginTop: 28,
     borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: AppStyles.color.grey,
+    borderRadius: AppStyles.borderRadius.main,
+  },
+  body: {
+    height: 42,
+    paddingLeft: 20,
+    paddingRight: 20,
+    color: AppStyles.color.text,
+  },
+  button: {
+    backgroundColor: "#002F67",
+    padding: 20,
+    borderRadius: 10,
+    alignSelf: "center",
+    marginTop: 20,
+  },
+  buttonText: {
+    fontSize: 20,
+    color: "#fff",
   },
 });
