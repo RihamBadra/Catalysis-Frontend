@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import LOGO from "../images/logo.png";
 import {
   StyleSheet,
   TouchableOpacity,
@@ -19,7 +20,13 @@ const Register = (props) => {
     <View style={styles.container}>
       <Text style={[styles.title, styles.leftTitle]}>Sign Up</Text>
       <View>
-        <Image source={require("../images/logo.png")} />
+        <Image
+          style={{
+            width: 500,
+            height: 150,
+          }}
+          source={LOGO}
+        />
       </View>
       <View style={styles.InputContainer}>
         <TextInput
