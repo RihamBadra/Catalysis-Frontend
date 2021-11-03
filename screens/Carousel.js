@@ -49,10 +49,7 @@ export default Carousel = ({ navigation }) => {
         />
       )}
       <Image
-        style={[
-          styles.image,
-          { marginTop: currentIndex != 0 ? 0 : 85 },
-        ]}
+        style={[styles.image, { width, marginTop: currentIndex != 0 ? 0 : 85 }]}
         source={require("../assets/a4ae5c3b15fa791bb4a5b4e91544fdea.png")}
       />
       <Animated.FlatList
