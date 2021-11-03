@@ -18,7 +18,6 @@ const Register = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.title, styles.leftTitle]}>Sign Up</Text>
       <View>
         <Image
           style={{
@@ -27,6 +26,7 @@ const Register = (props) => {
           }}
           source={LOGO}
         />
+        <Text style={[styles.title, styles.leftTitle]}>Sign Up</Text>
       </View>
       <View style={styles.InputContainer}>
         <TextInput
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: AppStyles.fontSize.title,
     fontWeight: "bold",
-    color: "#5550BD",
+    color: "#002F67",
     marginTop: 20,
     marginBottom: 20,
   },
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     color: AppStyles.color.text,
   },
   button: {
-    backgroundColor: "#5550BD",
+    backgroundColor: "#002F67",
     padding: 20,
     borderRadius: 5,
     alignSelf: "center",

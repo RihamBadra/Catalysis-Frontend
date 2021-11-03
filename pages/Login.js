@@ -17,7 +17,7 @@ const Register = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.title, styles.leftTitle]}>Login</Text>
+      
       <View>
         <Image
           style={{
@@ -26,6 +26,7 @@ const Register = (props) => {
           }}
           source={LOGO}
         />
+        <Text style={[styles.title, styles.leftTitle]}>Login</Text>
       </View>
       <View style={styles.InputContainer}>
         <TextInput
