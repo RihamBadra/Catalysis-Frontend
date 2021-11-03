@@ -7,7 +7,7 @@ import {
   View,
   Image,
 } from "react-native";
-import { AppStyles } from "../AppStyles";
+//import { AppStyles } from "../AppStyles";
 
 const Register = (props) => {
   const [fullname, setName] = useState("");
