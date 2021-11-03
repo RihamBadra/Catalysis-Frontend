@@ -18,16 +18,8 @@ const Register = (props) => {
 
   return (
     <View style={styles.container}>
-      <View>
-        <Image
-          style={{
-            width: 500,
-            height: 150,
-          }}
-          source={LOGO}
-        />
-        <Text style={[styles.title, styles.leftTitle]}>Sign Up</Text>
-      </View>
+      <Image style={styles.img} source={LOGO} />
+      <Text style={[styles.title, styles.leftTitle]}>Sign Up</Text>
       <View style={styles.InputContainer}>
         <TextInput
           style={styles.body}
@@ -70,7 +62,7 @@ const Register = (props) => {
         />
       </View>
       <TouchableOpacity
-        onPress={() => alert("Report generated successfully!")}
+        onPress={() => alert("Successfully!")}
         style={styles.button}
       >
         <Text style={styles.buttonText}>Sign Up</Text>
@@ -86,12 +78,19 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
+  container1: {
+    flex: 1,
+  },
+  img: {
+    flex: 2,
+    resizeMode: "contain",
+    marginTop: 30,
+  },
   title: {
+    flex: 1,
     fontSize: AppStyles.fontSize.title,
     fontWeight: "bold",
-    color: "#002F67",
-    marginTop: 20,
-    marginBottom: 20,
+    color: "#004E96",
   },
   leftTitle: {
     alignSelf: "stretch",
@@ -120,7 +119,7 @@ const styles = StyleSheet.create({
   },
   InputContainer: {
     width: AppStyles.textInputWidth.main,
-    marginTop: 30,
+    marginTop: 28,
     borderWidth: 1,
     borderStyle: "solid",
     borderColor: AppStyles.color.grey,
@@ -135,9 +134,10 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#002F67",
     padding: 20,
-    borderRadius: 5,
+    borderRadius: 10,
     alignSelf: "center",
     marginTop: 20,
+    marginBottom:20
   },
   buttonText: {
     fontSize: 20,

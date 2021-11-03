@@ -3,6 +3,7 @@ import LOGO from "../images/logo.png";
 import {
   StyleSheet,
   TouchableOpacity,
+  ScrollView,
   Text,
   TextInput,
   View,
@@ -11,60 +12,42 @@ import {
 import { AppStyles } from "../AppStyles";
 
 const Register = (props) => {
-  const [fullname, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   return (
     <View style={styles.container}>
-      
-      <View>
-        <Image
-          style={{
-            width: 500,
-            height: 150,
-          }}
-          source={LOGO}
-        />
+      <ScrollView>
+        <Image style={styles.img} source={LOGO} />
         <Text style={[styles.title, styles.leftTitle]}>Login</Text>
-      </View>
-      <View style={styles.InputContainer}>
-        <TextInput
-          style={styles.body}
-          placeholder="Full Name"
-          value={fullname}
-          onChangeText={(text) => setName(text)}
-          placeholderTextColor={AppStyles.color.grey}
-          underlineColorAndroid="transparent"
-        />
-      </View>
-      <View style={styles.InputContainer}>
-        <TextInput
-          style={styles.body}
-          placeholder="E-mail Address"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-          placeholderTextColor={AppStyles.color.grey}
-          underlineColorAndroid="transparent"
-        />
-      </View>
-      <View style={styles.InputContainer}>
-        <TextInput
-          style={styles.body}
-          placeholder="Password"
-          secureTextEntry={true}
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          placeholderTextColor={AppStyles.color.grey}
-          underlineColorAndroid="transparent"
-        />
-      </View>
-      <TouchableOpacity
-        onPress={() => alert("Report generated successfully!")}
-        style={styles.button}
-      >
-        <Text style={styles.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
+        <View style={styles.InputContainer}>
+          <TextInput
+            style={styles.body}
+            placeholder="E-mail Address"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            placeholderTextColor={AppStyles.color.grey}
+            underlineColorAndroid="transparent"
+          />
+        </View>
+        <View style={styles.InputContainer}>
+          <TextInput
+            style={styles.body}
+            placeholder="Password"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            placeholderTextColor={AppStyles.color.grey}
+            underlineColorAndroid="transparent"
+          />
+        </View>
+        <TouchableOpacity
+          onPress={() => alert("Successfully!")}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Sign Up</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 };
@@ -76,12 +59,19 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
+  container1: {
+    flex: 1,
+  },
+  img: {
+    flex: 2,
+    resizeMode: "contain",
+    marginTop: 30,
+  },
   title: {
+    flex: 1,
     fontSize: AppStyles.fontSize.title,
     fontWeight: "bold",
-    color: "#5550BD",
-    marginTop: 20,
-    marginBottom: 20,
+    color: "#004E96",
   },
   leftTitle: {
     alignSelf: "stretch",
@@ -110,7 +100,7 @@ const styles = StyleSheet.create({
   },
   InputContainer: {
     width: AppStyles.textInputWidth.main,
-    marginTop: 30,
+    marginTop: 28,
     borderWidth: 1,
     borderStyle: "solid",
     borderColor: AppStyles.color.grey,
@@ -123,9 +113,9 @@ const styles = StyleSheet.create({
     color: AppStyles.color.text,
   },
   button: {
-    backgroundColor: "#5550BD",
+    backgroundColor: "#002F67",
     padding: 20,
-    borderRadius: 5,
+    borderRadius: 10,
     alignSelf: "center",
     marginTop: 20,
   },

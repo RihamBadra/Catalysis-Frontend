@@ -25,7 +25,7 @@ export const AppStyles = {
     blue: "#3293fe",
   },
   fontSize: {
-    title: 30,
+    title: 28,
     content: 20,
     normal: 16,
   },
@@ -36,7 +36,7 @@ export const AppStyles = {
     main: "80%",
   },
   borderRadius: {
-    main: 25,
+    main: 0,
     small: 5,
   },
 };

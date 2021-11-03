@@ -1,10 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
 import Register from "./pages/Register";
+import { NavigationContainer } from "@react-navigation/native";
 
 export default function App() {
   return (
-    <Register></Register>
+    <NavigationContainer>
+      <Register />
+    </NavigationContainer>
   );
 }
-
