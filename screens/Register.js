@@ -5,68 +5,77 @@ import {
   TouchableOpacity,
   Text,
   TextInput,
+  useWindowDimensions,
   View,
   Image,
 } from "react-native";
 import { AppStyles } from "../AppStyles";
 
-const Register = (props) => {
+const Register = ({ navigation }) => {
   const [fullname, setName] = useState("");
-  const [phone, setPhone] = useState("");
+  const [confirm_password, setCpass] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { width, height } = useWindowDimensions();
+  const h = height / 4;
 
   return (
     <View style={styles.container}>
-      <Image style={styles.img} source={LOGO} />
+      <Image style={[styles.img, { width, maxHeight: h }]} source={LOGO} />
       <Text style={[styles.title, styles.leftTitle]}>Sign Up</Text>
-      <View style={styles.InputContainer}>
-        <TextInput
-          style={styles.body}
-          placeholder="Full Name"
-          value={fullname}
-          onChangeText={(text) => setName(text)}
-          placeholderTextColor={AppStyles.color.grey}
-          underlineColorAndroid="transparent"
-        />
+      <View style={styles.container2}>
+        <View style={styles.InputContainer}>
+          <TextInput
+            style={styles.body}
+            placeholder="Full Name"
+            value={fullname}
+            onChangeText={(text) => setName(text)}
+            placeholderTextColor={AppStyles.color.grey}
+            underlineColorAndroid="transparent"
+          />
+        </View>
+
+        <View style={styles.InputContainer}>
+          <TextInput
+            style={styles.body}
+            placeholder="E-mail Address"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            placeholderTextColor={AppStyles.color.grey}
+            underlineColorAndroid="transparent"
+          />
+        </View>
+        <View style={styles.InputContainer}>
+          <TextInput
+            style={styles.body}
+            placeholder="Password"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            placeholderTextColor={AppStyles.color.grey}
+            underlineColorAndroid="transparent"
+          />
+        </View>
+        <View style={styles.InputContainer}>
+          <TextInput
+            style={styles.body}
+            placeholder="Confirm Password"
+            secureTextEntry={true}
+            value={confirm_password}
+            onChangeText={(text) => setCpass(text)}
+            placeholderTextColor={AppStyles.color.grey}
+            underlineColorAndroid="transparent"
+          />
+        </View>
       </View>
-      <View style={styles.InputContainer}>
-        <TextInput
-          style={styles.body}
-          placeholder="Phone Number"
-          value={phone}
-          onChangeText={(text) => setPhone(text)}
-          placeholderTextColor={AppStyles.color.grey}
-          underlineColorAndroid="transparent"
-        />
+      <View style={styles.btn}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Login")}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Sign Up</Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.InputContainer}>
-        <TextInput
-          style={styles.body}
-          placeholder="E-mail Address"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-          placeholderTextColor={AppStyles.color.grey}
-          underlineColorAndroid="transparent"
-        />
-      </View>
-      <View style={styles.InputContainer}>
-        <TextInput
-          style={styles.body}
-          placeholder="Password"
-          secureTextEntry={true}
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          placeholderTextColor={AppStyles.color.grey}
-          underlineColorAndroid="transparent"
-        />
-      </View>
-      <TouchableOpacity
-        onPress={() => alert("Successfully!")}
-        style={styles.button}
-      >
-        <Text style={styles.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -75,11 +84,16 @@ export default Register;
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "white",
     flex: 1,
+  },
+  container2: {
+    flex: 1.2,
+    justifyContent: "center",
     alignItems: "center",
   },
-  container1: {
-    flex: 1,
+  btn: {
+    flex: 0.5,
   },
   img: {
     flex: 2,
@@ -87,7 +101,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   title: {
-    flex: 1,
     fontSize: AppStyles.fontSize.title,
     fontWeight: "bold",
     color: "#004E96",
@@ -119,7 +132,7 @@ const styles = StyleSheet.create({
   },
   InputContainer: {
     width: AppStyles.textInputWidth.main,
-    marginTop: 28,
+    marginTop: 20,
     borderWidth: 1,
     borderStyle: "solid",
     borderColor: AppStyles.color.grey,

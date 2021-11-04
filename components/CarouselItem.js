@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   image: {
-    flex: 2,
+    flex: 1.3,
   },
   itemTitle: {
     flex: 1,

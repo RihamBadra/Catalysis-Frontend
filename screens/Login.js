@@ -3,23 +3,28 @@ import LOGO from "../assets/a4ae5c3b15fa791bb4a5b4e91544fdea.png";
 import {
   StyleSheet,
   TouchableOpacity,
-  ScrollView,
   Text,
   TextInput,
+  useWindowDimensions,
   View,
   Image,
 } from "react-native";
 import { AppStyles } from "../AppStyles";
 
 const Register = (props) => {
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { width, height } = useWindowDimensions();
+  const h = height / 4;
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <Image style={styles.img} source={LOGO} />
-        <Text style={[styles.title, styles.leftTitle]}>Login</Text>
+      <Image style={[styles.img, { width, maxHeight: h }]} source={LOGO} />
+      <Text style={[styles.title, styles.leftTitle]}>Login</Text>
+      <View style={styles.container2}>
+        
+      
         <View style={styles.InputContainer}>
           <TextInput
             style={styles.body}
@@ -41,13 +46,16 @@ const Register = (props) => {
             underlineColorAndroid="transparent"
           />
         </View>
+        
+      </View>
+      <View style={styles.btn}>
         <TouchableOpacity
           onPress={() => alert("Successfully!")}
           style={styles.button}
         >
-          <Text style={styles.buttonText}>Sign Up</Text>
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
-      </ScrollView>
+      </View>
     </View>
   );
 };
@@ -56,11 +64,16 @@ export default Register;
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "white",
     flex: 1,
+  },
+  container2: {
+    flex: 1.2,
+    justifyContent: "center",
     alignItems: "center",
   },
-  container1: {
-    flex: 1,
+  btn: {
+    flex: 0.5,
   },
   img: {
     flex: 2,
@@ -68,7 +81,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   title: {
-    flex: 1,
     fontSize: AppStyles.fontSize.title,
     fontWeight: "bold",
     color: "#004E96",
@@ -100,7 +112,7 @@ const styles = StyleSheet.create({
   },
   InputContainer: {
     width: AppStyles.textInputWidth.main,
-    marginTop: 28,
+    marginTop: 20,
     borderWidth: 1,
     borderStyle: "solid",
     borderColor: AppStyles.color.grey,
@@ -118,6 +130,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignSelf: "center",
     marginTop: 20,
+    marginBottom: 20,
   },
   buttonText: {
     fontSize: 20,

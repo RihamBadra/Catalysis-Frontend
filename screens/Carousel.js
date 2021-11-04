@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    flex: 0.3,
+    flex: 0.4,
     resizeMode: "contain",
   },
   arrow: {
