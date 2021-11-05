@@ -40,7 +40,7 @@ export default Carousel = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {currentIndex != 0 && (
-        <Arrow onPress={handleBack}/>
+        <Arrow onPress={handleBack} margin={60}/>
       )}
       <Image
         style={[styles.image, { width, marginTop: currentIndex != 0 ? 0 : 85 }]}

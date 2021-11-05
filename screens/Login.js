@@ -10,15 +10,22 @@ import {
   Image,
 } from "react-native";
 import { AppStyles } from "../AppStyles";
+import Arrow from "../components/Arrow";
 
-const Login = (props) => {
+const Login = ({ props, navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { width, height } = useWindowDimensions();
   const h = height / 4;
 
+  const handleBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <View style={styles.container}>
+      <Arrow onPress={handleBack} margin={30} />
+
       <Image style={[styles.img, { width, maxHeight: h }]} source={LOGO} />
       <Text style={[styles.title, styles.leftTitle]}>Login</Text>
       <View style={styles.container2}>
@@ -74,7 +81,6 @@ const styles = StyleSheet.create({
   img: {
     flex: 2,
     resizeMode: "contain",
-    marginTop: 30,
   },
   title: {
     fontSize: AppStyles.fontSize.title,
