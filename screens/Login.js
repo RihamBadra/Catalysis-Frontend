@@ -11,8 +11,7 @@ import {
 } from "react-native";
 import { AppStyles } from "../AppStyles";
 
-const Register = (props) => {
-  
+const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { width, height } = useWindowDimensions();
@@ -23,8 +22,6 @@ const Register = (props) => {
       <Image style={[styles.img, { width, maxHeight: h }]} source={LOGO} />
       <Text style={[styles.title, styles.leftTitle]}>Login</Text>
       <View style={styles.container2}>
-        
-      
         <View style={styles.InputContainer}>
           <TextInput
             style={styles.body}
@@ -46,7 +43,6 @@ const Register = (props) => {
             underlineColorAndroid="transparent"
           />
         </View>
-        
       </View>
       <View style={styles.btn}>
         <TouchableOpacity
@@ -60,7 +56,7 @@ const Register = (props) => {
   );
 };
 
-export default Register;
+export default Login;
 
 const styles = StyleSheet.create({
   container: {

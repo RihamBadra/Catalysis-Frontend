@@ -6,10 +6,10 @@ import {
   useWindowDimensions,
   Animated,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
 import CarouselItem from "../components/CarouselItem";
 import data from "../slides";
 import Button from "../components/Button";
+import Arrow from "../components/Arrow";
 
 export default Carousel = ({ navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -40,13 +40,7 @@ export default Carousel = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {currentIndex != 0 && (
-        <AntDesign
-          name="left"
-          size={25}
-          color="black"
-          style={styles.arrow}
-          onPress={() => handleBack()}
-        />
+        <Arrow onPress={handleBack}/>
       )}
       <Image
         style={[styles.image, { width, marginTop: currentIndex != 0 ? 0 : 85 }]}
