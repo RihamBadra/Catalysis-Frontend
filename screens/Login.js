@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { AppStyles } from "../AppStyles";
 
-const Login = (props) => {
+const Login = ({ props, navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { width, height } = useWindowDimensions();
@@ -46,7 +46,10 @@ const Login = (props) => {
       </View>
       <View style={styles.btn}>
         <TouchableOpacity
-          onPress={() => alert("Successfully!")}
+          onPress={
+            () => navigation.navigate("Home")
+            // alert("Successfully!")
+          }
           style={styles.button}
         >
           <Text style={styles.buttonText}>Login</Text>

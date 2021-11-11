@@ -6,6 +6,7 @@ import {
   StyleSheet,
   useWindowDimensions,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function CarouselItem({ item }) {
   const { width } = useWindowDimensions();
