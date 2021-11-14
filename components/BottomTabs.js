@@ -5,6 +5,7 @@ import SearchScreen from "../screens/Search";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { View } from "react-native";
 
 const Tab = createMaterialBottomTabNavigator();
 

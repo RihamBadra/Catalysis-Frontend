@@ -29,7 +29,7 @@ export default Carousel = ({ navigation }) => {
       },
     });
     const result = await res.json();
-    // if (result.status == 200) navigation.navigate("Home");
+    if (result.status == 200) navigation.navigate("Home");
   }, []);
 
   const viewableItemsChanged = useRef(({ viewableItems }) => {
