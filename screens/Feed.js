@@ -57,7 +57,7 @@ export default function Feed() {
     const formData = new FormData();
     const token = await AsyncStorage.getItem("token");
     formData.append("card_id", id);
-    const res = await fetch(Url+"api/hidden", {
+    const res = await fetch(Url + "api/hidden", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -73,7 +73,7 @@ export default function Feed() {
     const formData = new FormData();
     const token = await AsyncStorage.getItem("token");
     formData.append("card_id", id);
-    const res = await fetch(Url+"api/saved", {
+    const res = await fetch(Url + "api/saved", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -87,7 +87,7 @@ export default function Feed() {
 
   useEffect(async () => {
     const token = await AsyncStorage.getItem("token");
-    const res = await fetch(Url+"api/class", {
+    const res = await fetch(Url + "api/class", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

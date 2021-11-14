@@ -61,7 +61,9 @@ export default function Popup({ setPop, hideClass, saveClass, item, found }) {
             height: width / 5,
           },
         ]}
-        onPress={() => setPop(false)}
+        onPress={() => {
+          setPop(false);
+        }}
       >
         <Text style={styles.larger}>Share to...</Text>
       </TouchableOpacity>
@@ -91,6 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     justifyContent: "space-evenly",
     alignItems: "center",
+    zIndex: 10,
   },
   center: {
     justifyContent: "center",
