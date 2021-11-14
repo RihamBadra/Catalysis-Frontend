@@ -26,7 +26,7 @@ const Register = ({ props, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Arrow onPress={handleBack} margin={50} />
+      <Arrow onPress={handleBack} />
 
       <Image style={[styles.img, { width, maxHeight: h }]} source={LOGO} />
       <Text style={[styles.title, styles.leftTitle]}>Sign Up</Text>

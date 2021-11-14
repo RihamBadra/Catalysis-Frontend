@@ -12,12 +12,13 @@ import {
 import { AppStyles } from "../AppStyles";
 import Arrow from "../components/Arrow";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Url from "../components/Url";
 
 export default function Login({ props, navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { width, height } = useWindowDimensions();
-  const h = height / 4;
+  const h = height / 5;
 
   const handleBack = () => {
     navigation.goBack();
@@ -41,7 +42,7 @@ export default function Login({ props, navigation }) {
 
   return (
     <View style={styles.container}>
-      <Arrow onPress={handleBack} margin={60} />
+      <Arrow onPress={handleBack} />
 
       <Image style={[styles.img, { width, maxHeight: h }]} source={LOGO} />
       <Text style={[styles.title, styles.leftTitle]}>Login</Text>

@@ -54,9 +54,9 @@ export default Carousel = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {currentIndex == 0 ? (
-        <Arrow onPress={handleBack} margin={60} opacity={0} />
+        <Arrow onPress={handleBack} opacity={0} />
       ) : (
-        <Arrow onPress={handleBack} margin={60} opacity={1} />
+        <Arrow onPress={handleBack} opacity={1} />
       )}
 
       <Image style={[styles.image, { width, maxHeight: h }]} source={LOGO} />
