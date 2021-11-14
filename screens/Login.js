@@ -23,7 +23,7 @@ const Login = ({ props, navigation }) => {
     body.append("email", email);
     body.append("password", password);
     try {
-      const res = await fetch("http://192.168.31.92:8000/api/login", {
+      const res = await fetch(Url + "api/login", {
         method: "POST",
         body: body,
       });

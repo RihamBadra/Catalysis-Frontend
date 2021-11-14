@@ -20,6 +20,7 @@ import Popup from "../components/Popup";
 import { useFocusEffect } from "@react-navigation/native";
 import { BackHandler } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Url from "../components/Url";
 
 export default function Feed() {
   const [card, setCard] = useState([]);
@@ -56,7 +57,7 @@ export default function Feed() {
     const formData = new FormData();
     const token = await AsyncStorage.getItem("token");
     formData.append("card_id", id);
-    const res = await fetch("http://192.168.31.92:8000/api/hidden", {
+    const res = await fetch(Url+"api/hidden", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -72,7 +73,7 @@ export default function Feed() {
     const formData = new FormData();
     const token = await AsyncStorage.getItem("token");
     formData.append("card_id", id);
-    const res = await fetch("http://192.168.31.92:8000/api/saved", {
+    const res = await fetch(Url+"api/saved", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -86,7 +87,7 @@ export default function Feed() {
 
   useEffect(async () => {
     const token = await AsyncStorage.getItem("token");
-    const res = await fetch("http://192.168.31.92:8000/api/class", {
+    const res = await fetch(Url+"api/class", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -174,7 +175,7 @@ export default function Feed() {
                         key={key}
                         style={{ width, height: width }}
                         source={{
-                          uri: "http://192.168.31.92:8000/" + img.name,
+                          uri: Url + img.name,
                         }}
                       />
                     ))}
