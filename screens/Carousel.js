@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   View,
   Image,
@@ -10,6 +10,7 @@ import CarouselItem from "../components/CarouselItem";
 import data from "../slides";
 import Button from "../components/Button";
 import Arrow from "../components/Arrow";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default Carousel = ({ navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -17,6 +18,17 @@ export default Carousel = ({ navigation }) => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const { width } = useWindowDimensions();
   let position = Animated.divide(scrollX, width);
+
+  useEffect(async () => {
+    const token = await AsyncStorage.getItem("token");
+    const res = await fetch("http://192.168.31.92:8000/api/checkToken", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await res.json();
+    if (result.status == 200) navigation.navigate("Home");
+  }, []);
 
   const viewableItemsChanged = useRef(({ viewableItems }) => {
     setCurrentIndex(viewableItems[0].index);

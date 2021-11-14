@@ -10,12 +10,29 @@ import {
   Image,
 } from "react-native";
 import { AppStyles } from "../AppStyles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({ props, navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { width, height } = useWindowDimensions();
   const h = height / 4;
+
+  const storeData = async () => {
+    const body = new FormData();
+    body.append("email", email);
+    body.append("password", password);
+    try {
+      const res = await fetch(Url + "api/login", {
+        method: "POST",
+        body: body,
+      });
+      const data = await res.json();
+      await AsyncStorage.setItem("token", data.access_token);
+    } catch (e) {
+      console.log("error", e);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -46,10 +63,10 @@ const Login = ({ props, navigation }) => {
       </View>
       <View style={styles.btn}>
         <TouchableOpacity
-          onPress={
-            () => navigation.navigate("Home")
-            // alert("Successfully!")
-          }
+          onPress={() => {
+            storeData();
+            navigation.navigate("Home");
+          }}
           style={styles.button}
         >
           <Text style={styles.buttonText}>Login</Text>

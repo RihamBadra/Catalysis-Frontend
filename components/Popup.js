@@ -8,14 +8,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-export default function Popup({ setPop }) {
+export default function Popup({ setPop, hideClass, saveClass, item, found }) {
   const { width } = useWindowDimensions();
-  const [back, setBack] = useState("white");
-  const [back1, setBack1] = useState("white");
-  const [back2, setBack2] = useState("white");
-  const [back3, setBack3] = useState("white");
-
-  
 
   return (
     <View style={styles.container}>
@@ -24,57 +18,52 @@ export default function Popup({ setPop }) {
           styles.center,
           {
             width,
-            backgroundColor: back,
-            height: width / 4,
+            height: width / 5,
           },
         ]}
-        onPressIn={() => {
-          setBack("gray");
-        }}
-        onPressOut={() => {
-          setBack("white");
-        }}
-        onPress={() => {
-          setPop(false);
-        }}
+        onPress={() => setPop(false)}
+      >
+        <Text style={styles.larger}>Report</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[
+          styles.center,
+          {
+            width,
+            height: width / 5,
+          },
+        ]}
+        onPress={() => setPop(false)}
       >
         <Text style={styles.larger}>Copy Link</Text>
       </TouchableOpacity>
       <TouchableOpacity
+        disabled={found}
         style={[
           styles.center,
           {
             width,
-            backgroundColor: back1,
-            height: width / 4,
+            height: width / 5,
           },
         ]}
-        onPressIn={() => {
-          setBack1("gray");
+        onPress={() => {
+          saveClass(item);
+          setPop(false);
         }}
-        onPressOut={() => {
-          setBack1("white");
-        }}
-        onPress={() => setPop(false)}
       >
-        <Text style={styles.larger}>Save</Text>
+        <Text style={[styles.larger, { opacity: found ? 0.5 : 1 }]}>Save</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={[
           styles.center,
           {
             width,
-            backgroundColor: back2,
-            height: width / 4,
+            height: width / 5,
           },
         ]}
-        onPressIn={() => {
-          setBack2("gray");
+        onPress={() => {
+          setPop(false);
         }}
-        onPressOut={() => {
-          setBack2("white");
-        }}
-        onPress={() => setPop(false)}
       >
         <Text style={styles.larger}>Share to...</Text>
       </TouchableOpacity>
@@ -83,17 +72,13 @@ export default function Popup({ setPop }) {
           styles.center,
           {
             width,
-            backgroundColor: back3,
-            height: width / 4,
+            height: width / 5,
           },
         ]}
-        onPressIn={() => {
-          setBack3("gray");
+        onPress={() => {
+          hideClass(item);
+          setPop(false);
         }}
-        onPressOut={() => {
-          setBack3("white");
-        }}
-        onPress={() => setPop(false)}
       >
         <Text style={styles.larger}>Hide</Text>
       </TouchableOpacity>
@@ -103,12 +88,17 @@ export default function Popup({ setPop }) {
 
 const styles = StyleSheet.create({
   container: {
+    position: "absolute",
+    bottom: 0,
+    backgroundColor: "white",
     justifyContent: "space-evenly",
     alignItems: "center",
+    zIndex: 10,
   },
   center: {
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
   },
   larger: {
     fontSize: 18,
