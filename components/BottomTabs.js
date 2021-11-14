@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import { StyleSheet } from "react-native";
+import React from "react";
 import FeedScreen from "../screens/Feed";
 import StatsScreen from "../screens/Stats";
 import SearchScreen from "../screens/Search";
@@ -11,19 +10,18 @@ const Tab = createMaterialBottomTabNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer style={styles.btn}>
-      <Tab.Navigator style={styles.btn}>
-        <Tab.Screen name="Feed" component={FeedScreen} />
-        <Tab.Screen name="Search" component={SearchScreen} />
-        <Tab.Screen name="Stats" component={StatsScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Tab.Navigator
+      barStyle={{ backgroundColor: "#fddeaf" }}
+      // activeColor="#00aea2"
+      // inactiveColor="#95a5a6"
+    >
+      <Tab.Screen
+        name="Feed"
+        component={FeedScreen}
+        //  options={{ tabBarBadge: 3 }}
+      />
+      <Tab.Screen name="Search" component={SearchScreen} />
+      <Tab.Screen name="Stats" component={StatsScreen} />
+    </Tab.Navigator>
   );
 }
-const styles = StyleSheet.create({
-  btn:{
-    backgroundColor: "red",
-    flex:1,
-  },
-});
-
