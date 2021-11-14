@@ -241,8 +241,6 @@ export default function Feed() {
           <Text style={styles.msg}>{msg}</Text>
         </View>
       )}
-
-      <View style={{ width, height: width / 5 }}></View>
     </View>
   );
 }

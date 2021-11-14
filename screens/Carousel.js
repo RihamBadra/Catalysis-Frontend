@@ -10,13 +10,15 @@ import CarouselItem from "../components/CarouselItem";
 import data from "../slides";
 import Button from "../components/Button";
 import Arrow from "../components/Arrow";
+import LOGO from "../assets/a4ae5c3b15fa791bb4a5b4e91544fdea.png";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default Carousel = ({ navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const dataRef = useRef();
   const scrollX = useRef(new Animated.Value(0)).current;
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
+  const h = height / 5;
   let position = Animated.divide(scrollX, width);
 
   useEffect(async () => {
@@ -27,7 +29,7 @@ export default Carousel = ({ navigation }) => {
       },
     });
     const result = await res.json();
-    if (result.status == 200) navigation.navigate("Home");
+    // if (result.status == 200) navigation.navigate("Home");
   }, []);
 
   const viewableItemsChanged = useRef(({ viewableItems }) => {
@@ -51,15 +53,13 @@ export default Carousel = ({ navigation }) => {
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
   return (
     <View style={styles.container}>
-      {currentIndex != 0 && (
-        <Arrow onPress={handleBack} margin={60}/>
+      {currentIndex == 0 ? (
+        <Arrow onPress={handleBack} margin={60} opacity={0} />
+      ) : (
+        <Arrow onPress={handleBack} margin={60} opacity={1} />
       )}
-      {currentIndex != 0 && <Arrow onPress={handleBack} />}
 
-      <Image
-        style={[styles.image, { width, marginTop: currentIndex != 0 ? 0 : 85 }]}
-        source={require("../assets/a4ae5c3b15fa791bb4a5b4e91544fdea.png")}
-      />
+      <Image style={[styles.image, { width, maxHeight: h }]} source={LOGO} />
       <Animated.FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    flex: 0.4,
+    // flex: 0.4,
     resizeMode: "contain",
   },
   dotView: {

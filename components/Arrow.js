@@ -2,14 +2,14 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function Arrow({ onPress, margin }) {
+export default function Arrow({ onPress, margin, opacity }) {
   return (
     <AntDesign
       name="left"
       size={25}
       color="black"
       onPress={onPress}
-      style={[styles.arrow, { marginTop: margin }]}
+      style={[styles.arrow, { marginTop: margin, opacity }]}
     />
   );
 }

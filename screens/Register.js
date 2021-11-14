@@ -18,7 +18,7 @@ const Register = ({ props, navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { width, height } = useWindowDimensions();
-  const h = height / 4;
+  const h = height / 5;
 
   const handleBack = () => {
     navigation.goBack();
@@ -26,7 +26,7 @@ const Register = ({ props, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Arrow onPress={handleBack} margin={30} />
+      <Arrow onPress={handleBack} margin={50} />
 
       <Image style={[styles.img, { width, maxHeight: h }]} source={LOGO} />
       <Text style={[styles.title, styles.leftTitle]}>Sign Up</Text>
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     flex: 0.5,
   },
   img: {
-    flex: 2,
+    // flex: 2,
     resizeMode: "contain",
   },
   title: {

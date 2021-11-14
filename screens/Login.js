@@ -13,7 +13,7 @@ import { AppStyles } from "../AppStyles";
 import Arrow from "../components/Arrow";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Login = ({ props, navigation }) => {
+export default function Login({ props, navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { width, height } = useWindowDimensions();
@@ -21,6 +21,7 @@ const Login = ({ props, navigation }) => {
 
   const handleBack = () => {
     navigation.goBack();
+  };
 
   const storeData = async () => {
     const body = new FormData();
@@ -40,7 +41,7 @@ const Login = ({ props, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Arrow onPress={handleBack} margin={30} />
+      <Arrow onPress={handleBack} margin={60} />
 
       <Image style={[styles.img, { width, maxHeight: h }]} source={LOGO} />
       <Text style={[styles.title, styles.leftTitle]}>Login</Text>
@@ -80,9 +81,7 @@ const Login = ({ props, navigation }) => {
       </View>
     </View>
   );
-};
-
-export default Login;
+}
 
 const styles = StyleSheet.create({
   container: {
