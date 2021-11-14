@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   View,
   Image,
@@ -10,6 +10,7 @@ import CarouselItem from "../components/CarouselItem";
 import data from "../slides";
 import Button from "../components/Button";
 import Arrow from "../components/Arrow";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default Carousel = ({ navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -17,6 +18,17 @@ export default Carousel = ({ navigation }) => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const { width } = useWindowDimensions();
   let position = Animated.divide(scrollX, width);
+
+  useEffect(async () => {
+    const token = await AsyncStorage.getItem("token");
+    const res = await fetch("http://192.168.31.92:8000/api/checkToken", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await res.json();
+    if (result.status == 200) navigation.navigate("Home");
+  }, []);
 
   const viewableItemsChanged = useRef(({ viewableItems }) => {
     setCurrentIndex(viewableItems[0].index);
@@ -42,6 +54,8 @@ export default Carousel = ({ navigation }) => {
       {currentIndex != 0 && (
         <Arrow onPress={handleBack} margin={60}/>
       )}
+      {currentIndex != 0 && <Arrow onPress={handleBack} />}
+
       <Image
         style={[styles.image, { width, marginTop: currentIndex != 0 ? 0 : 85 }]}
         source={require("../assets/a4ae5c3b15fa791bb4a5b4e91544fdea.png")}
@@ -96,11 +110,6 @@ const styles = StyleSheet.create({
   image: {
     flex: 0.4,
     resizeMode: "contain",
-  },
-  arrow: {
-    marginTop: 60,
-    alignSelf: "flex-start",
-    marginLeft: 10,
   },
   dotView: {
     flexDirection: "row",
