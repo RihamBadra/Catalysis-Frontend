@@ -10,8 +10,9 @@ import {
   Image,
 } from "react-native";
 import { AppStyles } from "../AppStyles";
+import Arrow from "../components/Arrow";
 
-const Register = ({ navigation }) => {
+const Register = ({ props, navigation }) => {
   const [fullname, setName] = useState("");
   const [confirm_password, setCpass] = useState("");
   const [email, setEmail] = useState("");
@@ -19,8 +20,14 @@ const Register = ({ navigation }) => {
   const { width, height } = useWindowDimensions();
   const h = height / 4;
 
+  const handleBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <View style={styles.container}>
+      <Arrow onPress={handleBack} margin={30} />
+
       <Image style={[styles.img, { width, maxHeight: h }]} source={LOGO} />
       <Text style={[styles.title, styles.leftTitle]}>Sign Up</Text>
       <View style={styles.container2}>
@@ -98,7 +105,6 @@ const styles = StyleSheet.create({
   img: {
     flex: 2,
     resizeMode: "contain",
-    marginTop: 30,
   },
   title: {
     fontSize: AppStyles.fontSize.title,

@@ -51,7 +51,11 @@ export default Carousel = ({ navigation }) => {
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
   return (
     <View style={styles.container}>
+      {currentIndex != 0 && (
+        <Arrow onPress={handleBack} margin={60}/>
+      )}
       {currentIndex != 0 && <Arrow onPress={handleBack} />}
+
       <Image
         style={[styles.image, { width, marginTop: currentIndex != 0 ? 0 : 85 }]}
         source={require("../assets/a4ae5c3b15fa791bb4a5b4e91544fdea.png")}
