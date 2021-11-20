@@ -6,12 +6,12 @@ import {
   Image,
   StyleSheet,
   useWindowDimensions,
+  TouchableOpacity,
 } from "react-native";
 import {
   AntDesign,
   FontAwesome5,
   FontAwesome,
-  MaterialIcons,
   MaterialCommunityIcons,
   Ionicons,
 } from "@expo/vector-icons";
@@ -22,7 +22,7 @@ import { BackHandler } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Url from "../components/Url";
 
-export default function Feed() {
+export default function Feed({ navigation }) {
   const [card, setCard] = useState([]);
   const [pop, setPop] = useState(false);
   const [scroll, setScroll] = useState(true);
@@ -39,9 +39,7 @@ export default function Feed() {
       const onBackPress = () => {
         return true;
       };
-
       BackHandler.addEventListener("hardwareBackPress", onBackPress);
-
       return () =>
         BackHandler.removeEventListener("hardwareBackPress", onBackPress);
     }, [])
@@ -93,6 +91,7 @@ export default function Feed() {
       },
     });
     const result = await res.json();
+    // console.log(result);
     setCard(result.class);
     setSaved(result.saved);
   }, [hide, sav]);
@@ -100,6 +99,19 @@ export default function Feed() {
   useEffect(() => {
     setScroll(!pop);
   }, [pop]);
+
+  const logout = async () => {
+    let token = await AsyncStorage.getItem("token");
+    const res = await fetch(Url + "api/logout", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    await AsyncStorage.setItem("token", "");
+    await AsyncStorage.setItem("user", "");
+    navigation.goBack("Login");
+  };
 
   return (
     <View
@@ -122,6 +134,9 @@ export default function Feed() {
           size={24}
           color="black"
           style={styles.notifications}
+          onPress={() => {
+            logout();
+          }}
         />
         <FontAwesome
           name="user-circle"
@@ -171,13 +186,22 @@ export default function Feed() {
                 >
                   {ins.posts &&
                     ins.posts.map((img, key) => (
-                      <Image
+                      <TouchableOpacity
+                        activeOpacity={1}
                         key={key}
-                        style={{ width, height: width }}
-                        source={{
-                          uri: Url + img.name,
+                        onPress={() => {
+                          navigation.navigate("Course", {
+                            info: ins,
+                          });
                         }}
-                      />
+                      >
+                        <Image
+                          style={{ width, height: width }}
+                          source={{
+                            uri: Url + img.name,
+                          }}
+                        />
+                      </TouchableOpacity>
                     ))}
                 </Swiper>
               </View>
@@ -203,11 +227,12 @@ export default function Feed() {
                 </View>
                 <View style={styles.rating}>
                   {[...Array(ins.rating)].map((s, key) => (
-                    <MaterialIcons
+                    <Ionicons
                       key={key}
-                      name="star-rate"
-                      size={17}
+                      name="star"
+                      size={15}
                       color="gold"
+                      style={styles.empty}
                     />
                   ))}
                   {[...Array(5 - ins.rating)].map((s, key) => (
@@ -288,7 +313,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   empty: { paddingHorizontal: 1 },
-  buttonText: { fontSize: 50 },
+  buttonText: { fontSize: 50, color: "#002f67" },
   msgBox: {
     backgroundColor: "#002f67",
     justifyContent: "center",

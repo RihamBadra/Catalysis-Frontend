@@ -8,6 +8,7 @@ import {
   useWindowDimensions,
   View,
   Image,
+  ScrollView,
 } from "react-native";
 import { AppStyles } from "../AppStyles";
 import Arrow from "../components/Arrow";
@@ -21,12 +22,13 @@ export default function Login({ props, navigation }) {
   const h = height / 5;
 
   const handleBack = () => {
-    navigation.goBack();
+    // navigation.navigate("Register");
+    navigation.goBack("Register");
   };
 
-  const storeData = async () => {
+  const login = async () => {
     const body = new FormData();
-    body.append("email", email);
+    body.append("email", email.toLowerCase());
     body.append("password", password);
     try {
       const res = await fetch(Url + "api/login", {
@@ -35,14 +37,16 @@ export default function Login({ props, navigation }) {
       });
       const data = await res.json();
       await AsyncStorage.setItem("token", data.access_token);
+      await AsyncStorage.setItem("user", JSON.stringify(data.user.id));
+      navigation.navigate("Home");
     } catch (e) {
       console.log("error", e);
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Arrow onPress={handleBack} />
+    <ScrollView style={styles.container}>
+      <Arrow onPress={handleBack} color="#002F67" />
 
       <Image style={[styles.img, { width, maxHeight: h }]} source={LOGO} />
       <Text style={[styles.title, styles.leftTitle]}>Login</Text>
@@ -72,15 +76,14 @@ export default function Login({ props, navigation }) {
       <View style={styles.btn}>
         <TouchableOpacity
           onPress={() => {
-            storeData();
-            navigation.navigate("Home");
+            login();
           }}
           style={styles.button}
         >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -98,7 +101,8 @@ const styles = StyleSheet.create({
     flex: 0.5,
   },
   img: {
-    flex: 2,
+    // flex: 2,
+    marginTop: 45,
     resizeMode: "contain",
   },
   title: {

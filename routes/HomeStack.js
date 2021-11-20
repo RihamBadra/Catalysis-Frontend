@@ -9,6 +9,7 @@ import Register from "../screens/Register";
 import Feed from "../components/BottomTabs";
 import StatsScreen from "../screens/Stats";
 import SearchScreen from "../screens/Search";
+import Course from "../screens/Course";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -23,14 +24,8 @@ export default function HomeStack({ initialRoute = "Carousel" }) {
         <Stack.Screen name="Carousel" component={Carousel} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="Course" component={Course} />
         <Stack.Screen name="Home" component={Feed} />
-        {/* <NavigationContainer>
-        <Tab.Navigator >
-        <Tab.Screen name="Feed" component={Feed} />
-        <Tab.Screen name="Search" component={SearchScreen} />
-        <Tab.Screen name="Stats" component={StatsScreen} />
-      </Tab.Navigator>
-      </NavigationContainer> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
