@@ -12,6 +12,7 @@ import Button from "../components/Button";
 import Arrow from "../components/Arrow";
 import LOGO from "../assets/a4ae5c3b15fa791bb4a5b4e91544fdea.png";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Url from "../components/Url";
 
 export default Carousel = ({ navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,7 +24,7 @@ export default Carousel = ({ navigation }) => {
 
   useEffect(async () => {
     const token = await AsyncStorage.getItem("token");
-    const res = await fetch("http://192.168.31.92:8000/api/checkToken", {
+    const res = await fetch(Url + "api/checkToken", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -54,11 +55,10 @@ export default Carousel = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {currentIndex == 0 ? (
-        <Arrow onPress={handleBack} opacity={0} />
+        <Arrow onPress={handleBack} opacity={0} color="#002F67" />
       ) : (
-        <Arrow onPress={handleBack} opacity={1} />
+        <Arrow onPress={handleBack} opacity={1} color="#002F67" />
       )}
-
       <Image style={[styles.image, { width, maxHeight: h }]} source={LOGO} />
       <Animated.FlatList
         horizontal
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    // flex: 0.4,
+    marginTop: 45,
     resizeMode: "contain",
   },
   dotView: {

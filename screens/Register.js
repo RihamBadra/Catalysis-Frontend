@@ -8,6 +8,7 @@ import {
   useWindowDimensions,
   View,
   Image,
+  ScrollView,
 } from "react-native";
 import { AppStyles } from "../AppStyles";
 import Arrow from "../components/Arrow";
@@ -21,12 +22,13 @@ const Register = ({ props, navigation }) => {
   const h = height / 5;
 
   const handleBack = () => {
-    navigation.goBack();
+    // navigation.navigate("Carousel");
+    navigation.goBack("Carousel");
   };
 
   return (
-    <View style={styles.container}>
-      <Arrow onPress={handleBack} />
+    <ScrollView style={styles.container}>
+      <Arrow onPress={handleBack} color="#002F67" />
 
       <Image style={[styles.img, { width, maxHeight: h }]} source={LOGO} />
       <Text style={[styles.title, styles.leftTitle]}>Sign Up</Text>
@@ -83,7 +85,7 @@ const Register = ({ props, navigation }) => {
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -103,7 +105,7 @@ const styles = StyleSheet.create({
     flex: 0.5,
   },
   img: {
-    // flex: 2,
+    marginTop: 45,
     resizeMode: "contain",
   },
   title: {
