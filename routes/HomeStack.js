@@ -17,6 +17,7 @@ import Welcome from "../screens/Welcome";
 import Loading from "../screens/loading";
 import Loading2 from "../screens/Loading2";
 import Saved from "../screens/Saved";
+import Registered from "../screens/Registered";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -39,6 +40,7 @@ export default function HomeStack({ initialRoute = "Carousel" }) {
         <Stack.Screen name="Home" component={Feed} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="Saved" component={Saved} />
+        <Stack.Screen name="Registered" component={Registered} />
         <Stack.Screen name="EditProfile" component={EditProfile} />
       </Stack.Navigator>
     </NavigationContainer>
