@@ -72,8 +72,8 @@ export default function Login({ props, navigation }) {
       <View style={styles.btn}>
         <TouchableOpacity
           onPress={() => {
-            storeData();
-            navigation.navigate("Home");
+            // storeData();
+            navigation.navigate("Welcome");
           }}
           style={styles.button}
         >
