@@ -22,8 +22,7 @@ import { BackHandler } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Url from "../components/Url";
 
-
-export default function Feed({navigation}) {
+export default function Feed({ navigation }) {
   const [card, setCard] = useState([]);
   const [pop, setPop] = useState(false);
   const [scroll, setScroll] = useState(true);
@@ -34,6 +33,7 @@ export default function Feed({navigation}) {
   const [item, setItem] = useState(0);
   const { width } = useWindowDimensions();
   const [msg, setMsg] = useState("");
+  let ind;
 
   useFocusEffect(
     React.useCallback(() => {
@@ -92,7 +92,6 @@ export default function Feed({navigation}) {
       },
     });
     const result = await res.json();
-    // console.log(result);
     setCard(result.class);
     setSaved(result.saved);
   }, [hide, sav]);
@@ -100,19 +99,6 @@ export default function Feed({navigation}) {
   useEffect(() => {
     setScroll(!pop);
   }, [pop]);
-
-  const logout = async () => {
-    let token = await AsyncStorage.getItem("token");
-    const res = await fetch(Url + "api/logout", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    await AsyncStorage.setItem("token", "");
-    await AsyncStorage.setItem("user", "");
-    navigation.goBack("Login");
-  };
 
   return (
     <View
@@ -136,12 +122,13 @@ export default function Feed({navigation}) {
           color="black"
           style={styles.notifications}
           onPress={() => {
-            logout();
+            // logout();
+            navigation.navigate("Stats");
           }}
         />
         <FontAwesome
           name="user-circle"
-          onPress={()=>navigation.navigate("Profile")}
+          onPress={() => navigation.navigate("Profile")}
           size={24}
           color="black"
           style={styles.profile}
@@ -161,11 +148,14 @@ export default function Feed({navigation}) {
                   onPress={() => {
                     setPop(!pop);
                     setItem(ins.id);
-                    saved.forEach((sv) => {
-                      if (ins.id == sv) {
-                        setFound(true);
-                      } else setFound(false);
-                    });
+                    ind = saved
+                      .map((e) => {
+                        return e;
+                      })
+                      .indexOf(ins.id);
+                    if (ind >= 0) {
+                      setFound(true);
+                    } else setFound(false);
                   }}
                 />
               </View>

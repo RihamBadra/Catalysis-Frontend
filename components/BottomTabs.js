@@ -1,18 +1,20 @@
 import React from "react";
-import FeedScreen from "../screens/Feed";
+import Feed from "../screens/Feed";
 import StatsScreen from "../screens/Stats";
 import SearchScreen from "../screens/Search";
 import { Platform, Text, View } from "react-native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
+import Chat from "../screens/ChatScreen";
 
 const Tab = createMaterialBottomTabNavigator();
 
 export default function App() {
   return (
     <Tab.Navigator
+      shifting={false}
       screenOptions={{
-        tabBarLabel: null,
+        tabBarLabel: "",
       }}
       barStyle={{
         backgroundColor: "#fddeaf",
@@ -22,7 +24,7 @@ export default function App() {
     >
       <Tab.Screen
         name="Feed"
-        component={FeedScreen}
+        component={Feed}
         options={{
           tabBarIcon: ({ color }) => (
             <View>
@@ -31,7 +33,6 @@ export default function App() {
             </View>
           ),
         }}
-        //  options={{ tabBarBadge: 3 }}
       />
       <Tab.Screen
         name="Search"
@@ -41,6 +42,23 @@ export default function App() {
             <View>
               <Text></Text>
               <Ionicons name="search" size={26} color={color} />
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Chat"
+        component={Chat}
+        options={{
+          // tabBarBadge: 3,
+          tabBarIcon: ({ color }) => (
+            <View>
+              <Text></Text>
+              <MaterialCommunityIcons
+                name="chat-processing"
+                size={26}
+                color={color}
+              />
             </View>
           ),
         }}

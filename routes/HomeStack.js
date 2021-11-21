@@ -16,7 +16,7 @@ import Categories from "../screens/Categories";
 import Welcome from "../screens/Welcome";
 import Loading from "../screens/loading";
 import Loading2 from "../screens/Loading2";
-import Cat from "../components/Cat";
+import Saved from "../screens/Saved";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -37,17 +37,9 @@ export default function HomeStack({ initialRoute = "Carousel" }) {
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Course" component={Course} />
         <Stack.Screen name="Home" component={Feed} />
-
         <Stack.Screen name="Profile" component={Profile} />
-        <Stack.Screen name="EditProfile" component={EditProfile}/>
-
-        {/* <NavigationContainer>
-        <Tab.Navigator >
-        <Tab.Screen name="Feed" component={Feed} />
-        <Tab.Screen name="Search" component={SearchScreen} />
-        <Tab.Screen name="Stats" component={StatsScreen} />
-      </Tab.Navigator>
-      </NavigationContainer> */}
+        <Stack.Screen name="Saved" component={Saved} />
+        <Stack.Screen name="EditProfile" component={EditProfile} />
       </Stack.Navigator>
     </NavigationContainer>
   );

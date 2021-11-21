@@ -6,6 +6,7 @@ import {
   ImageBackground,
   TextInput,
   StyleSheet,
+  useWindowDimensions,
 } from "react-native";
 import Arrow from "../components/Arrow";
 import { useTheme } from "react-native-paper";
@@ -20,8 +21,9 @@ import Animated from "react-native-reanimated";
 // import ImagePicker from 'react-native-image-crop-picker';
 
 const EditProfileScreen = ({ navigation }) => {
+  const { width, height } = useWindowDimensions();
+
   const handleBack = () => {
-    // navigation.navigate("Register");
     navigation.goBack();
   };
 
@@ -86,7 +88,17 @@ const EditProfileScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Arrow onPress={handleBack} color="#002F67" />
+      <View
+        style={[
+          styles.headerC,
+          {
+            height: width / 4,
+          },
+        ]}
+      >
+        <Arrow onPress={handleBack} color="#002F67" />
+        <Text style={styles.headerTitle}>Edit Profile</Text>
+      </View>
 
       {/* <BottomSheet
         ref={this.bs}
@@ -270,6 +282,15 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+  },
+  headerC: {
+    backgroundColor: "#fddeaf",
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+  headerTitle: {
+    fontSize: 20,
+    marginBottom: "5%",
   },
   panelHeader: {
     alignItems: "center",

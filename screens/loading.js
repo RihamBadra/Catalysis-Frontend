@@ -1,24 +1,14 @@
-import React, { Component, useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, View, Text, StyleSheet } from "react-native";
 
 export default function Loading({ navigation }) {
   const [state, setState] = useState(true);
 
   const closeActivityIndicator = () =>
-    setTimeout(
-      () => {
-        setState(false);
-        navigation.navigate("Loading2");
-      },
-
-      3000
-    );
+    setTimeout(() => {
+      setState(false);
+      navigation.navigate("Loading2");
+    }, 3000);
 
   useEffect(() => closeActivityIndicator());
 

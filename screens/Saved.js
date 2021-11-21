@@ -17,20 +17,25 @@ import {
 } from "@expo/vector-icons";
 import Url from "../components/Url";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Arrow from "../components/Arrow";
 
-export default function Stats() {
-  const [myClasses, setMyClasses] = useState([]);
+export default function Saved({ navigation }) {
   const { width, height } = useWindowDimensions();
+  const [saved, setSaved] = useState([]);
+
+  const handleBack = () => {
+    navigation.navigate("Profile");
+  };
 
   useEffect(async () => {
     const token = await AsyncStorage.getItem("token");
-    const res = await fetch(Url + "api/OwnerClass", {
+    const res = await fetch(Url + "api/saved", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    const data = await res.json();
-    setMyClasses(data.class);
+    const result = await res.json();
+    setSaved(result.saved);
   }, []);
 
   return (
@@ -44,20 +49,22 @@ export default function Stats() {
         style={[
           styles.header,
           {
-            width,
             height: width / 4,
           },
         ]}
-      />
+      >
+        <Arrow onPress={handleBack} color="#002F67" />
+        <Text style={styles.headerTitle}>Saved Classes</Text>
+      </View>
       {/* <ScrollView scrollEnabled={scroll} style={styles.scroll}> */}
-      {myClasses.length == 0 ? (
+      {saved.length == 0 ? (
         <View style={[styles.noClass, { height: height - width / 3 }]}>
-          <Text>No classes to show</Text>
+          <Text>No saved classes</Text>
         </View>
       ) : (
         <ScrollView style={styles.scroll}>
-          {myClasses &&
-            myClasses.map((ins, key) => (
+          {saved &&
+            saved.map((ins, key) => (
               <View key={key} style={styles.innerView}>
                 <View style={styles.setTitle}>
                   <Text style={styles.title}>{ins.title}</Text>
@@ -99,11 +106,11 @@ export default function Stats() {
                         <TouchableOpacity
                           activeOpacity={1}
                           key={key}
-                          // onPress={() => {
-                          //   navigation.navigate("Course", {
-                          //     info: ins,
-                          //   });
-                          // }}
+                          onPress={() => {
+                            navigation.navigate("Course", {
+                              info: ins,
+                            });
+                          }}
                         >
                           <Image
                             style={{ width, height: width }}
@@ -170,7 +177,12 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: "#fddeaf",
-    position: "relative",
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+  headerTitle: {
+    fontSize: 20,
+    marginBottom: "5%",
   },
   scroll: { backgroundColor: "white" },
   innerView: { marginBottom: "5%" },

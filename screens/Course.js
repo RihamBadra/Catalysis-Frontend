@@ -54,7 +54,6 @@ export default function Course({ navigation, route }) {
         return e.id;
       })
       .indexOf(info.id);
-    console.log(result.class[index]);
     setInfo(result.class[index]);
   }, [edit]);
 

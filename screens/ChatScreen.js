@@ -1,9 +1,8 @@
 import React from "react";
-import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
+import { View, Text, useWindowDimensions, StyleSheet } from "react-native";
 
-export default function Search() {
+export default function Chat() {
   const { width } = useWindowDimensions();
-
   return (
     <View style={styles.container}>
       <View
@@ -15,7 +14,7 @@ export default function Search() {
           },
         ]}
       >
-        <Text style={styles.headerTitle}>Search Screen</Text>
+        <Text style={styles.headerTitle}>Chat Screen</Text>
       </View>
     </View>
   );

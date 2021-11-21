@@ -8,12 +8,11 @@ import {
   useWindowDimensions,
   View,
   Image,
-  ScrollView,
 } from "react-native";
 import { AppStyles } from "../AppStyles";
 import Arrow from "../components/Arrow";
 
-const Register = ({ props, navigation }) => {
+const Register = ({ navigation }) => {
   const [fullname, setName] = useState("");
   const [confirm_password, setCpass] = useState("");
   const [email, setEmail] = useState("");
@@ -22,12 +21,12 @@ const Register = ({ props, navigation }) => {
   const h = height / 5;
 
   const handleBack = () => {
-    // navigation.navigate("Carousel");
-    navigation.goBack("Carousel");
+    navigation.navigate("Carousel");
+    // navigation.goBack();
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <Arrow onPress={handleBack} color="#002F67" />
 
       <Image style={[styles.img, { width, maxHeight: h }]} source={LOGO} />
@@ -85,7 +84,7 @@ const Register = ({ props, navigation }) => {
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 

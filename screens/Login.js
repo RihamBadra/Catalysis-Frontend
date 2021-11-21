@@ -46,7 +46,7 @@ export default function Login({ props, navigation }) {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <Arrow onPress={handleBack} color="#002F67" />
 
       <Image style={[styles.img, { width, maxHeight: h }]} source={LOGO} />
@@ -76,16 +76,18 @@ export default function Login({ props, navigation }) {
       </View>
       <View style={styles.btn}>
         <TouchableOpacity
-          onPress={() => {
-            // login();
-            navigation.navigate("Welcome");
+          onPress={async () => {
+            await login();
+            setEmail("");
+            setPassword("");
+            // navigation.navigate("Welcome");
           }}
           style={styles.button}
         >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 

@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   arrow: {
     left: 10,
     position: "absolute",
-    top: 45,
+    top: 55,
     zIndex: 10,
   },
 });
