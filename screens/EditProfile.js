@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,83 +6,89 @@ import {
   ImageBackground,
   TextInput,
   StyleSheet,
-} from 'react-native';
+} from "react-native";
+import Arrow from "../components/Arrow";
+import { useTheme } from "react-native-paper";
 
-import {useTheme} from 'react-native-paper';
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Feather from "react-native-vector-icons/Feather";
 
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Feather from 'react-native-vector-icons/Feather';
+import BottomSheet from "reanimated-bottom-sheet";
+import Animated from "react-native-reanimated";
 
-import BottomSheet from 'reanimated-bottom-sheet';
-import Animated from 'react-native-reanimated';
+// import ImagePicker from 'react-native-image-crop-picker';
 
-import ImagePicker from 'react-native-image-crop-picker';
+const EditProfileScreen = ({ navigation }) => {
+  const handleBack = () => {
+    // navigation.navigate("Register");
+    navigation.goBack();
+  };
 
-const EditProfileScreen = () => {
+  // const {colors} = useTheme();
 
-  const {colors} = useTheme();
+  // const takePhotoFromCamera = () => {
+  //   ImagePicker.openCamera({
+  //     compressImageMaxWidth: 300,
+  //     compressImageMaxHeight: 300,
+  //     cropping: true,
+  //     compressImageQuality: 0.7
+  //   }).then(image => {
+  //     console.log(image);
+  //     setImage(image.path);
+  //     this.bs.current.snapTo(1);
+  //   });
+  // }
 
-  const takePhotoFromCamera = () => {
-    ImagePicker.openCamera({
-      compressImageMaxWidth: 300,
-      compressImageMaxHeight: 300,
-      cropping: true,
-      compressImageQuality: 0.7
-    }).then(image => {
-      console.log(image);
-      setImage(image.path);
-      this.bs.current.snapTo(1);
-    });
-  }
+  // const choosePhotoFromLibrary = () => {
+  //   ImagePicker.openPicker({
+  //     width: 300,
+  //     height: 300,
+  //     cropping: true,
+  //     compressImageQuality: 0.7
+  //   }).then(image => {
+  //     console.log(image);
+  //     setImage(image.path);
+  //     this.bs.current.snapTo(1);
+  //   });
+  // }
 
-  const choosePhotoFromLibrary = () => {
-    ImagePicker.openPicker({
-      width: 300,
-      height: 300,
-      cropping: true,
-      compressImageQuality: 0.7
-    }).then(image => {
-      console.log(image);
-      setImage(image.path);
-      this.bs.current.snapTo(1);
-    });
-  }
+  // renderInner = () => (
+  //   <View style={styles.panel}>
+  //     <View style={{alignItems: 'center'}}>
+  //       <Text style={styles.panelTitle}>Upload Photo</Text>
+  //       <Text style={styles.panelSubtitle}>Choose Your Profile Picture</Text>
+  //     </View>
+  //     <TouchableOpacity style={styles.panelButton} onPress={takePhotoFromCamera}>
+  //       <Text style={styles.panelButtonTitle}>Take Photo</Text>
+  //     </TouchableOpacity>
+  //     <TouchableOpacity style={styles.panelButton} onPress={choosePhotoFromLibrary}>
+  //       <Text style={styles.panelButtonTitle}>Choose From Library</Text>
+  //     </TouchableOpacity>
+  //     <TouchableOpacity
+  //       style={styles.panelButton}
+  //       onPress={() => this.bs.current.snapTo(1)}>
+  //       <Text style={styles.panelButtonTitle}>Cancel</Text>
+  //     </TouchableOpacity>
+  //   </View>
+  // );
 
-  renderInner = () => (
-    <View style={styles.panel}>
-      <View style={{alignItems: 'center'}}>
-        <Text style={styles.panelTitle}>Upload Photo</Text>
-        <Text style={styles.panelSubtitle}>Choose Your Profile Picture</Text>
-      </View>
-      <TouchableOpacity style={styles.panelButton} onPress={takePhotoFromCamera}>
-        <Text style={styles.panelButtonTitle}>Take Photo</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.panelButton} onPress={choosePhotoFromLibrary}>
-        <Text style={styles.panelButtonTitle}>Choose From Library</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.panelButton}
-        onPress={() => this.bs.current.snapTo(1)}>
-        <Text style={styles.panelButtonTitle}>Cancel</Text>
-      </TouchableOpacity>
-    </View>
-  );
+  // renderHeader = () => (
+  //   <View style={styles.header}>
+  //     <View style={styles.panelHeader}>
+  //       <View style={styles.panelHandle} />
+  //     </View>
+  //   </View>
+  // );
 
-  renderHeader = () => (
-    <View style={styles.header}>
-      <View style={styles.panelHeader}>
-        <View style={styles.panelHandle} />
-      </View>
-    </View>
-  );
-
-  bs = React.createRef();
-  fall = new Animated.Value(1);
+  // bs = React.createRef();
+  // fall = new Animated.Value(1);
 
   return (
     <View style={styles.container}>
-      <BottomSheet
+      <Arrow onPress={handleBack} color="#002F67" />
+
+      {/* <BottomSheet
         ref={this.bs}
         snapPoints={[330, 0]}
         renderContent={this.renderInner}
@@ -225,7 +231,7 @@ const EditProfileScreen = () => {
         <TouchableOpacity style={styles.commandButton} onPress={() => {}}>
           <Text style={styles.panelButtonTitle}>Submit</Text>
         </TouchableOpacity>
-      </Animated.View>
+      </Animated.View> */}
     </View>
   );
 };
@@ -239,13 +245,13 @@ const styles = StyleSheet.create({
   commandButton: {
     padding: 15,
     borderRadius: 10,
-    backgroundColor: '#FF6347',
-    alignItems: 'center',
+    backgroundColor: "#FF6347",
+    alignItems: "center",
     marginTop: 10,
   },
   panel: {
     padding: 20,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     paddingTop: 20,
     // borderTopLeftRadius: 20,
     // borderTopRightRadius: 20,
@@ -255,9 +261,9 @@ const styles = StyleSheet.create({
     // shadowOpacity: 0.4,
   },
   header: {
-    backgroundColor: '#FFFFFF',
-    shadowColor: '#333333',
-    shadowOffset: {width: -1, height: -3},
+    backgroundColor: "#FFFFFF",
+    shadowColor: "#333333",
+    shadowOffset: { width: -1, height: -3 },
     shadowRadius: 2,
     shadowOpacity: 0.4,
     // elevation: 5,
@@ -266,13 +272,13 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
   },
   panelHeader: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   panelHandle: {
     width: 40,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#00000040',
+    backgroundColor: "#00000040",
     marginBottom: 10,
   },
   panelTitle: {
@@ -281,41 +287,41 @@ const styles = StyleSheet.create({
   },
   panelSubtitle: {
     fontSize: 14,
-    color: 'gray',
+    color: "gray",
     height: 30,
     marginBottom: 10,
   },
   panelButton: {
     padding: 13,
     borderRadius: 10,
-    backgroundColor: '#FF6347',
-    alignItems: 'center',
+    backgroundColor: "#FF6347",
+    alignItems: "center",
     marginVertical: 7,
   },
   panelButtonTitle: {
     fontSize: 17,
-    fontWeight: 'bold',
-    color: 'white',
+    fontWeight: "bold",
+    color: "white",
   },
   action: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginTop: 10,
     marginBottom: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#f2f2f2',
+    borderBottomColor: "#f2f2f2",
     paddingBottom: 5,
   },
   actionError: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginTop: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#FF0000',
+    borderBottomColor: "#FF0000",
     paddingBottom: 5,
   },
   textInput: {
     flex: 1,
-    marginTop: Platform.OS === 'ios' ? 0 : -12,
+    marginTop: Platform.OS === "ios" ? 0 : -12,
     paddingLeft: 10,
-    color: '#05375a',
+    color: "#05375a",
   },
 });

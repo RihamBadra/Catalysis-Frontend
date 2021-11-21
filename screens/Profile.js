@@ -10,19 +10,19 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
-import {
-  AntDesign,
-  FontAwesome5,
-  FontAwesome,
-  MaterialIcons,
-  MaterialCommunityIcons,
-  Ionicons,
-} from "@expo/vector-icons";
+import { FontAwesome, MaterialIcons, Ionicons } from "@expo/vector-icons";
+import Arrow from "../components/Arrow";
 
-export default function Profile({navigation}) {
+export default function Profile({ navigation }) {
   const { width } = useWindowDimensions();
+
+  const handleBack = () => {
+    // navigation.navigate("Register");
+    navigation.goBack("Home");
+  };
+
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView>
       <View
         style={[
           styles.header,
@@ -31,30 +31,40 @@ export default function Profile({navigation}) {
           },
         ]}
       >
-        <Text style={{ fontSize: 20 }}>Profile</Text>
+        <Arrow onPress={handleBack} color="#002F67" />
+
+        <Text style={styles.headerTitle}>Profile</Text>
       </View>
-      <View style={{ alignItems: "center", marginTop: width / 3 }}>
+      <View style={[styles.img,{marginTop: width / 3 }]}>
         <Image
-          style={{ width: width / 2, height: width / 2 ,borderRadius:width,borderColor:"green",borderWidth:1}}
+          style={{
+            width: width / 2,
+            height: width / 2,
+            borderRadius: width,
+            borderColor: "green",
+            borderWidth: 1,
+          }}
           source={require("../assets/profile-icon-9.png")}
         />
-        <View style={{marginTop: width /20,alignItems:"center"}}>
-        <Text>Bassam</Text>
-        <Text>Bassam@gmail.com</Text>
+        <View style={{ marginTop: width / 20, alignItems: "center" }}>
+          <Text>Bassam</Text>
+          <Text>Bassam@gmail.com</Text>
         </View>
       </View>
       <View style={styles.btns}>
-        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('EditProfile')}>
-        <FontAwesome
-          name="user-circle"
-          size={24}
-          color="black"
-          style={styles.save}
-          
-        />
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => navigation.navigate("EditProfile")}
+        >
+          <FontAwesome
+            name="user-circle"
+            size={24}
+            color="black"
+            style={styles.save}
+          />
           <Text>Edit Profile</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn} >
+        <TouchableOpacity style={styles.btn}>
           <Ionicons
             name="settings"
             size={24}
@@ -75,13 +85,13 @@ export default function Profile({navigation}) {
           <Text>Languages</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btn}>
-        <MaterialIcons
+          <MaterialIcons
             name="save-alt"
             size={24}
             color="black"
             style={styles.save}
           />
-        <Text>Saved</Text>
+          <Text>Saved</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -89,6 +99,9 @@ export default function Profile({navigation}) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   header: {
     backgroundColor: "#fddeaf",
     position: "absolute",
@@ -98,6 +111,10 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     paddingBottom: "5%",
   },
+  headerTitle: {
+    fontSize: 20,
+  },
+  img: { alignItems: "center", },
   btn: {
     borderBottomWidth: 1,
     flexDirection: "row",

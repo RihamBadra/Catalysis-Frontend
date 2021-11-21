@@ -42,6 +42,7 @@ export default function Login({ props, navigation }) {
     } catch (e) {
       console.log("error", e);
     }
+    navigation.navigate("Home");
   };
 
   return (
@@ -76,8 +77,7 @@ export default function Login({ props, navigation }) {
       <View style={styles.btn}>
         <TouchableOpacity
           onPress={() => {
-
-            // storeData();
+            // login();
             navigation.navigate("Welcome");
           }}
           style={styles.button}
