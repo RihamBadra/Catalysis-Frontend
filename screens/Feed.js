@@ -22,7 +22,8 @@ import { BackHandler } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Url from "../components/Url";
 
-export default function Feed({ navigation }) {
+
+export default function Feed({navigation}) {
   const [card, setCard] = useState([]);
   const [pop, setPop] = useState(false);
   const [scroll, setScroll] = useState(true);
@@ -140,6 +141,7 @@ export default function Feed({ navigation }) {
         />
         <FontAwesome
           name="user-circle"
+          onPress={()=>navigation.navigate("Profile")}
           size={24}
           color="black"
           style={styles.profile}
