@@ -9,6 +9,8 @@ import Register from "../screens/Register";
 import Feed from "../components/BottomTabs";
 import StatsScreen from "../screens/Stats";
 import SearchScreen from "../screens/Search";
+import Profile from "../screens/Profile";
+import EditProfile from "../screens/EditProfile";
 import Categories from "../screens/Categories";
 import Welcome from "../screens/Welcome";
 import Loading from "../screens/loading";
@@ -33,6 +35,9 @@ export default function HomeStack({ initialRoute = "Carousel" }) {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Home" component={Feed} />
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="EditProfile" component={EditProfile}/>
+
         {/* <NavigationContainer>
         <Tab.Navigator >
         <Tab.Screen name="Feed" component={Feed} />
