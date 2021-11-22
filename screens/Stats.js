@@ -18,7 +18,7 @@ import {
 import Url from "../components/Url";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function Stats() {
+export default function Stats({ navigation }) {
   const [myClasses, setMyClasses] = useState([]);
   const { width, height } = useWindowDimensions();
 
@@ -99,11 +99,11 @@ export default function Stats() {
                         <TouchableOpacity
                           activeOpacity={1}
                           key={key}
-                          // onPress={() => {
-                          //   navigation.navigate("Course", {
-                          //     info: ins,
-                          //   });
-                          // }}
+                          onPress={() => {
+                            navigation.navigate("Course", {
+                              info: ins,
+                            });
+                          }}
                         >
                           <Image
                             style={{ width, height: width }}

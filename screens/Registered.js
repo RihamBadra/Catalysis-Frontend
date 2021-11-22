@@ -54,7 +54,7 @@ export default function Registered({ navigation }) {
         ]}
       >
         <Arrow onPress={handleBack} color="#002F67" />
-        <Text style={styles.headerTitle}>reg Classes</Text>
+        <Text style={styles.headerTitle}>Registered Classes</Text>
       </View>
       {/* <ScrollView scrollEnabled={scroll} style={styles.scroll}> */}
       {reg.length == 0 ? (

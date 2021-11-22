@@ -1,11 +1,11 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { ScrollView, StyleSheet, Text } from "react-native";
 
 export default function Overview({ info }) {
   return (
-    <View style={styles.overview}>
+    <ScrollView style={styles.overview} bounces={false}>
       <Text>{info.overview}</Text>
-    </View>
+    </ScrollView>
   );
 }
 

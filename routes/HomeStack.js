@@ -5,10 +5,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import Login from "../screens/Login";
 import Carousel from "../screens/Carousel";
 import Register from "../screens/Register";
-// import Feed from "../screens/Feed";
 import Feed from "../components/BottomTabs";
-import StatsScreen from "../screens/Stats";
-import SearchScreen from "../screens/Search";
 import Course from "../screens/Course";
 import Profile from "../screens/Profile";
 import EditProfile from "../screens/EditProfile";
@@ -18,11 +15,12 @@ import Loading from "../screens/loading";
 import Loading2 from "../screens/Loading2";
 import Saved from "../screens/Saved";
 import Registered from "../screens/Registered";
+import { LogBox } from "react-native";
 
 const Stack = createStackNavigator();
-const Tab = createMaterialBottomTabNavigator();
 
 export default function HomeStack({ initialRoute = "Carousel" }) {
+  LogBox.ignoreAllLogs();
   return (
     <NavigationContainer>
       <Stack.Navigator

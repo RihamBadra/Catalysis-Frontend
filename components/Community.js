@@ -9,7 +9,14 @@ import {
 } from "react-native";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 
-export default function Community({ ratings, reviews, ena, setAdd, btn }) {
+export default function Community({
+  ratings,
+  reviews,
+  ena,
+  setAdd,
+  btn,
+  mine,
+}) {
   const [community, setCommunity] = useState([]);
   let ind;
   let ar = [];
@@ -104,7 +111,7 @@ export default function Community({ ratings, reviews, ena, setAdd, btn }) {
             </View>
           ))}
       </ScrollView>
-      {ena && (
+      {ena && !mine && (
         <TouchableOpacity
           style={[
             styles.review,

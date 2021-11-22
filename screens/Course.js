@@ -29,6 +29,7 @@ export default function Course({ navigation, route }) {
   const [users, setUsers] = useState([]);
   const [edit, setEdit] = useState(0);
   const [btn, setBtn] = useState(0);
+  const [mine, setMine] = useState(false);
 
   const [routes] = useState([
     { key: "first", title: "Overview" },
@@ -67,6 +68,7 @@ export default function Course({ navigation, route }) {
     if (index >= 0) {
       setEna(true);
     }
+    if (info.user_id == Number(connectedUser)) setMine(true);
   }, [users]);
 
   useEffect(async () => {
@@ -136,6 +138,7 @@ export default function Course({ navigation, route }) {
       ena={ena}
       setAdd={setAdd}
       btn={btn}
+      mine={mine}
     />
   );
 
@@ -168,16 +171,18 @@ export default function Course({ navigation, route }) {
       <View>
         <Text style={styles.owner}>{info.owner.name}</Text>
       </View>
-      <TouchableOpacity
-        onPress={() => register()}
-        disabled={ena}
-        style={[
-          styles.button,
-          { width: width - 50, backgroundColor: ena ? "#6b7785" : "#002F67" },
-        ]}
-      >
-        <Text style={styles.btnText}>Register for free</Text>
-      </TouchableOpacity>
+      {!mine && (
+        <TouchableOpacity
+          onPress={() => register()}
+          disabled={ena}
+          style={[
+            styles.button,
+            { width: width - 50, backgroundColor: ena ? "#6b7785" : "#002F67" },
+          ]}
+        >
+          <Text style={styles.btnText}>Register for free</Text>
+        </TouchableOpacity>
+      )}
       <TabView
         navigationState={{ index, routes }}
         renderScene={renderScene}

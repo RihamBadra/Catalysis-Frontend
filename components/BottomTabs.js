@@ -9,7 +9,7 @@ import Chat from "../screens/ChatScreen";
 
 const Tab = createMaterialBottomTabNavigator();
 
-export default function App() {
+export default function BottomTabs({}) {
   return (
     <Tab.Navigator
       shifting={false}

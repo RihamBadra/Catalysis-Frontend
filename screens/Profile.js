@@ -18,6 +18,7 @@ export default function Profile({ navigation }) {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [prof, setProf] = useState("");
+  const [bk, setBk] = useState(0);
 
   const data = [
     { key: 0, name: "user-circle", text: "Edit Profile" },
@@ -55,7 +56,7 @@ export default function Profile({ navigation }) {
     setProf(result.user.profile);
     setUserName(result.user.name);
     setUserEmail(result.user.email);
-  }, []);
+  }, [bk]);
 
   return (
     <View style={styles.container}>
@@ -70,7 +71,7 @@ export default function Profile({ navigation }) {
         <Arrow onPress={handleBack} color="#002F67" />
         <Text style={styles.headerTitle}>Profile</Text>
       </View>
-      <View style={[styles.img, { marginTop: "5%" }]}>
+      <View style={[styles.img]}>
         <Image
           style={[
             styles.pic,
@@ -95,7 +96,13 @@ export default function Profile({ navigation }) {
         bounces={false}
         data={data}
         renderItem={({ item }) => (
-          <Settings navigation={navigation} name={item.name} text={item.text} />
+          <Settings
+            navigation={navigation}
+            name={item.name}
+            text={item.text}
+            setBk={setBk}
+            prof={prof}
+          />
         )}
       />
       <TouchableOpacity
@@ -122,7 +129,7 @@ const styles = StyleSheet.create({
     marginBottom: "5%",
   },
   desc: { marginTop: "5%", alignItems: "center" },
-  img: { alignItems: "center" },
+  img: { alignItems: "center", marginTop: "5%" },
   pic: { borderRadius: 200, borderColor: "#05336a", borderWidth: 2 },
   logout: {
     alignItems: "center",

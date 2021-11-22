@@ -7,13 +7,14 @@ import {
   FontAwesome5,
 } from "@expo/vector-icons";
 
-export default function Settings({ navigation, name, text }) {
+export default function Settings({ navigation, name, text, setBk, prof }) {
   return (
     <TouchableOpacity
       style={styles.btn}
       onPress={() => {
         name == "save-alt" && navigation.navigate("Saved");
-        name == "user-circle" && navigation.navigate("EditProfile");
+        name == "user-circle" &&
+          navigation.navigate("EditProfile", { setBk: setBk, prof: prof });
         name == "school" && navigation.navigate("Registered");
       }}
     >
