@@ -108,7 +108,7 @@ export default function Community({ ratings, reviews, ena, setAdd, btn }) {
         <TouchableOpacity
           style={[
             styles.review,
-            { backgroundColor: btn ? "#6b7785" : "#002F67" },
+            { backgroundColor: btn >= 0 ? "#6b7785" : "#002F67" },
           ]}
           disabled={btn == -1 ? false : true}
           onPress={() => setAdd(true)}

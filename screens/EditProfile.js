@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -10,6 +10,9 @@ import {
 } from "react-native";
 import Arrow from "../components/Arrow";
 import { useTheme } from "react-native-paper";
+import DropDownPicker from "react-native-dropdown-picker";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -18,73 +21,115 @@ import Feather from "react-native-vector-icons/Feather";
 import BottomSheet from "reanimated-bottom-sheet";
 import Animated from "react-native-reanimated";
 
-// import ImagePicker from 'react-native-image-crop-picker';
+import ImagePicker from "react-native-image-picker";
+import Url from "../components/Url";
 
 const EditProfileScreen = ({ navigation }) => {
-  const { width, height } = useWindowDimensions();
+  const { width } = useWindowDimensions();
+  const [open, setOpen] = useState(false);
+  const [open1, setOpen1] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [value, setValue] = useState(null);
+  const [value1, setValue1] = useState(null);
+  const [value2, setValue2] = useState(null);
+  const [items, setItems] = useState([]);
+  let ar = [];
+
+  const bs = React.createRef();
+  const fall = new Animated.Value(1);
 
   const handleBack = () => {
     navigation.goBack();
   };
 
-  // const {colors} = useTheme();
+  const { colors } = useTheme();
 
-  // const takePhotoFromCamera = () => {
-  //   ImagePicker.openCamera({
-  //     compressImageMaxWidth: 300,
-  //     compressImageMaxHeight: 300,
-  //     cropping: true,
-  //     compressImageQuality: 0.7
-  //   }).then(image => {
-  //     console.log(image);
-  //     setImage(image.path);
-  //     this.bs.current.snapTo(1);
-  //   });
-  // }
+  const takePhotoFromCamera = () => {
+    try {
+      ImagePicker.openCamera({
+        compressImageMaxWidth: 300,
+        compressImageMaxHeight: 300,
+        cropping: true,
+        compressImageQuality: 0.7,
+      }).then((image) => {
+        console.log(image);
+        setImage(image.path);
+        bs.current.snapTo(1);
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-  // const choosePhotoFromLibrary = () => {
-  //   ImagePicker.openPicker({
-  //     width: 300,
-  //     height: 300,
-  //     cropping: true,
-  //     compressImageQuality: 0.7
-  //   }).then(image => {
-  //     console.log(image);
-  //     setImage(image.path);
-  //     this.bs.current.snapTo(1);
-  //   });
-  // }
+  useEffect(async () => {
+    const token = await AsyncStorage.getItem("token");
+    const res = await fetch(Url + "api/userCategory", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await res.json();
+    result.cat.map((item, key) =>
+      ar.push({
+        key: key,
+        label: item.category.name,
+        value: item.category.name,
+      })
+    );
+    setItems(ar);
+  }, []);
 
-  // renderInner = () => (
-  //   <View style={styles.panel}>
-  //     <View style={{alignItems: 'center'}}>
-  //       <Text style={styles.panelTitle}>Upload Photo</Text>
-  //       <Text style={styles.panelSubtitle}>Choose Your Profile Picture</Text>
-  //     </View>
-  //     <TouchableOpacity style={styles.panelButton} onPress={takePhotoFromCamera}>
-  //       <Text style={styles.panelButtonTitle}>Take Photo</Text>
-  //     </TouchableOpacity>
-  //     <TouchableOpacity style={styles.panelButton} onPress={choosePhotoFromLibrary}>
-  //       <Text style={styles.panelButtonTitle}>Choose From Library</Text>
-  //     </TouchableOpacity>
-  //     <TouchableOpacity
-  //       style={styles.panelButton}
-  //       onPress={() => this.bs.current.snapTo(1)}>
-  //       <Text style={styles.panelButtonTitle}>Cancel</Text>
-  //     </TouchableOpacity>
-  //   </View>
-  // );
+  const choosePhotoFromLibrary = () => {
+    try {
+      ImagePicker.openPicker({
+        width: 300,
+        height: 300,
+        cropping: true,
+        compressImageQuality: 0.7,
+      }).then((image) => {
+        console.log(image);
+        setImage(image.path);
+        bs.current.snapTo(1);
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-  // renderHeader = () => (
-  //   <View style={styles.header}>
-  //     <View style={styles.panelHeader}>
-  //       <View style={styles.panelHandle} />
-  //     </View>
-  //   </View>
-  // );
+  const renderInner = () => (
+    <View style={styles.panel}>
+      <View style={{ alignItems: "center" }}>
+        <Text style={styles.panelTitle}>Upload Photo</Text>
+        <Text style={styles.panelSubtitle}>Choose Your Profile Picture</Text>
+      </View>
+      <TouchableOpacity
+        style={styles.panelButton}
+        onPress={takePhotoFromCamera}
+      >
+        <Text style={styles.panelButtonTitle}>Take Photo</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.panelButton}
+        onPress={choosePhotoFromLibrary}
+      >
+        <Text style={styles.panelButtonTitle}>Choose From Library</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.panelButton}
+        onPress={() => bs.current.snapTo(1)}
+      >
+        <Text style={styles.panelButtonTitle}>Cancel</Text>
+      </TouchableOpacity>
+    </View>
+  );
 
-  // bs = React.createRef();
-  // fall = new Animated.Value(1);
+  const renderHeader = () => (
+    <View style={styles.header}>
+      <View style={styles.panelHeader}>
+        <View style={styles.panelHandle} />
+      </View>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
@@ -100,48 +145,99 @@ const EditProfileScreen = ({ navigation }) => {
         <Text style={styles.headerTitle}>Edit Profile</Text>
       </View>
 
-      {/* <BottomSheet
-        ref={this.bs}
+      <DropDownPicker 
+        containerStyle={[
+          styles.drop,
+          {
+            width: width / 1.5,
+          },
+        ]}
+        open={open}
+        value={value}
+        items={items}
+        setOpen={setOpen}
+        setValue={setValue}
+        setItems={setItems}
+      />
+
+      <DropDownPicker
+        containerStyle={[
+          styles.drop,
+          {
+            width: width / 1.5,
+          },
+        ]}
+        open={open1}
+        value={value1}
+        items={items}
+        setOpen={setOpen1}
+        setValue={setValue1}
+        setItems={setItems}
+      />
+
+      <DropDownPicker
+        containerStyle={[
+          styles.drop,
+          {
+            width: width / 1.5,
+          },
+        ]}
+        open={open2}
+        value={value2}
+        items={items}
+        setOpen={setOpen2}
+        setValue={setValue2}
+        setItems={setItems}
+      />
+
+      <BottomSheet
+        ref={bs}
         snapPoints={[330, 0]}
-        renderContent={this.renderInner}
-        renderHeader={this.renderHeader}
+        renderContent={renderInner}
+        renderHeader={renderHeader}
         initialSnap={1}
-        callbackNode={this.fall}
+        callbackNode={fall}
         enabledGestureInteraction={true}
       />
-      <Animated.View style={{margin: 20,
-        opacity: Animated.add(0.1, Animated.multiply(this.fall, 1.0)),
-    }}>
-        <View style={{alignItems: 'center'}}>
-          <TouchableOpacity onPress={() => this.bs.current.snapTo(0)}>
+      <Animated.View
+        style={{
+          margin: 20,
+          opacity: Animated.add(0.1, Animated.multiply(fall, 1.0)),
+        }}
+      >
+        <View style={{ alignItems: "center" }}>
+          <TouchableOpacity onPress={() => bs.current.snapTo(0)}>
             <View
               style={{
                 height: 100,
                 width: 100,
                 borderRadius: 15,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <ImageBackground
-               source={require("../assets/profile-icon-9.png")}
-                style={{height: 100, width: 100}}
-                imageStyle={{borderRadius: 15}}>
+                source={require("../assets/profile-icon-9.png")}
+                style={{ height: 100, width: 100 }}
+                imageStyle={{ borderRadius: 15 }}
+              >
                 <View
                   style={{
                     flex: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
                   <Icon
                     name="camera"
                     size={35}
                     color="#fff"
                     style={{
                       opacity: 0.7,
-                      alignItems: 'center',
-                      justifyContent: 'center',
+                      alignItems: "center",
+                      justifyContent: "center",
                       borderWidth: 1,
-                      borderColor: '#fff',
+                      borderColor: "#fff",
                       borderRadius: 10,
                     }}
                   />
@@ -149,7 +245,7 @@ const EditProfileScreen = ({ navigation }) => {
               </ImageBackground>
             </View>
           </TouchableOpacity>
-          <Text style={{marginTop: 10, fontSize: 18, fontWeight: 'bold'}}>
+          <Text style={{ marginTop: 10, fontSize: 18, fontWeight: "bold" }}>
             John Doe
           </Text>
         </View>
@@ -243,7 +339,7 @@ const EditProfileScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.commandButton} onPress={() => {}}>
           <Text style={styles.panelButtonTitle}>Submit</Text>
         </TouchableOpacity>
-      </Animated.View> */}
+      </Animated.View>
     </View>
   );
 };
@@ -254,6 +350,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  drop: { alignSelf: "center", marginBottom: "20%" },
   commandButton: {
     padding: 15,
     borderRadius: 10,

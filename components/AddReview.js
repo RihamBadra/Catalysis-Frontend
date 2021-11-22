@@ -6,7 +6,6 @@ import {
   Text,
   TextInput,
   useWindowDimensions,
-  TouchableWithoutFeedback,
   TouchableOpacity,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -109,15 +108,12 @@ export default function AddReview({ setAdd, id, setEdit }) {
 const styles = StyleSheet.create({
   fields: {
     position: "absolute",
-    // backgroundColor: "#d0d5db",
     backgroundColor: "white",
     top: "25%",
     padding: "5%",
     justifyContent: "flex-end",
     alignSelf: "center",
     borderWidth: 2,
-    // marginLeft: "5%",
-    // marginRight: "5%",
   },
   close: { alignSelf: "flex-end" },
   input: {
@@ -139,7 +135,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-end",
     justifyContent: "center",
-    // borderWidth: 1,
     marginBottom: "5%",
   },
   empty: { paddingHorizontal: 1 },
