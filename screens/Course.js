@@ -4,7 +4,6 @@ import {
   useWindowDimensions,
   StyleSheet,
   Image,
-  ScrollView,
   Text,
   TouchableOpacity,
 } from "react-native";
@@ -13,12 +12,11 @@ import Swiper from "react-native-swiper";
 import Url from "../components/Url";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
-import { Video } from "expo-av";
-import { setStatusBarBackgroundColor } from "expo-status-bar";
+
 import Overview from "../components/Overview";
 import Community from "../components/Community";
 import AddReview from "../components/AddReview";
-// import { Video } from "expo";
+import Sessions from "../components/Sessions";
 
 export default function Course({ navigation, route }) {
   const [add, setAdd] = useState(false);
@@ -102,34 +100,7 @@ export default function Course({ navigation, route }) {
 
   const FirstRoute = () => <Overview info={info} />;
 
-  const SecondRoute = () => (
-    <ScrollView style={{ flex: 1 }}>
-      {/* <View style={{ flex: 1, height: height / 3 }}> */}
-
-      <Video
-        style={{ height: height / 3, width }}
-        // ref={video}
-        // style={styles.video}
-        source={{
-          uri: Url + "videos/5YcCctaAhUpPBmUj9WmjwoVWlm2SiE8dCMjJatOw.mp4",
-          headers: {
-            Accept: "video/mp4",
-          },
-        }}
-        // source={{
-        //   uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
-        // }}
-        useNativeControls
-        resizeMode="contain"
-        isLooping
-        shouldPlay
-        playsInSilentLockedModeIOS={true}
-        // onPlaybackStatusUpdate={(status) => setStatus(() => status)}
-      />
-      {/* </View> */}
-      {/* <View style={{ flex: 1 }}></View> */}
-    </ScrollView>
-  );
+  const SecondRoute = () => <Sessions info={info.videos} ena={ena} />;
 
   const ThirdRoute = () => (
     <Community

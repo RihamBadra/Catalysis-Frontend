@@ -16,21 +16,24 @@ import DropDownPicker from "react-native-dropdown-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as ImagePicker from "expo-image-picker";
 import Url from "../components/Url";
+import { Picker } from "@react-native-picker/picker";
 // import { useFormik } from "formik";
 
 const EditProfileScreen = ({ navigation, route }) => {
   const { width, height } = useWindowDimensions();
   const [openIm, setOpenIm] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [open1, setOpen1] = useState(false);
-  const [open2, setOpen2] = useState(false);
   const [value, setValue] = useState(null);
   const [value1, setValue1] = useState(null);
   const [value2, setValue2] = useState(null);
   const [items, setItems] = useState([]);
+  const [cat1, setCat1] = useState([]);
+  const [cat2, setCat2] = useState([]);
+  const [cat3, setCat3] = useState([]);
   const [prof, setProf] = useState(route.params.prof);
   const [photo, setPhoto] = useState("");
   let ar = [];
+  let ar1 = [];
+  let ind1, ind2, ind3;
 
   const handleBack = () => {
     route.params.setBk((prev) => {
@@ -53,11 +56,54 @@ const EditProfileScreen = ({ navigation, route }) => {
         ar.push({
           key: key,
           label: item.name,
-          value: item.name,
+          value: item.id,
         })
       );
     setItems(ar);
+    const resC = await fetch(Url + "api/userCategory", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const resultC = await resC.json();
+    resultC.cat &&
+      resultC.cat.map((item, key) =>
+        ar1.push({
+          key: key,
+          label: item.category.name,
+          value: item.category_id,
+        })
+      );
+    // setCat1(ar1.slice(0, 1));
+    // setCat2(ar1.slice(1, 2));
+    // setCat3(ar1.slice(2));
+    // console.log(value);
   }, []);
+
+  // useEffect(() => {
+  //   if (cat1.length > 0 && cat2.length > 0 && cat3.length > 0) {
+  //     ind1 = items
+  //       .map((e) => {
+  //         return e.value;
+  //       })
+  //       .indexOf(cat1[0].value);
+  //     ind2 = items
+  //       .map((e) => {
+  //         return e.value;
+  //       })
+  //       .indexOf(cat2[0].value);
+  //     ind3 = items
+  //       .map((e) => {
+  //         return e.value;
+  //       })
+  //       .indexOf(cat3[0].value);
+  //     console.log(ind1);
+  //     items.splice(ind1, 1);
+  //     items.splice(ind2, 1);
+  //     items.splice(ind3, 1);
+  //   }
+  //   console.log(value);
+  // }, [cat1]);
 
   const setProfile = async () => {
     const token = await AsyncStorage.getItem("token");
@@ -100,6 +146,12 @@ const EditProfileScreen = ({ navigation, route }) => {
     setPhoto(pickerResult);
   };
 
+  // useEffect(() => {
+  //   console.log("value", value);
+  //   console.log("value1", value1);
+  //   console.log("value2", value2);
+  // }, [value, value1, value2]);
+
   return (
     <View style={styles.container}>
       <View
@@ -113,6 +165,7 @@ const EditProfileScreen = ({ navigation, route }) => {
         <Arrow onPress={handleBack} color="#002F67" />
         <Text style={styles.headerTitle}>Edit Profile</Text>
       </View>
+      {/* <ScrollView bounces={false}> */}
       <View style={styles.contain}>
         <Image
           source={
@@ -147,7 +200,7 @@ const EditProfileScreen = ({ navigation, route }) => {
         <Text style={styles.buttonText}>Update profile</Text>
       </TouchableOpacity>
 
-      <DropDownPicker
+      {/* <DropDownPicker
         containerStyle={[
           styles.drop,
           {
@@ -160,37 +213,60 @@ const EditProfileScreen = ({ navigation, route }) => {
         setOpen={setOpen}
         setValue={setValue}
         setItems={setItems}
-      />
+      />*/}
 
-      <DropDownPicker
-        containerStyle={[
-          styles.drop,
-          {
-            width: width / 1.5,
-          },
-        ]}
-        open={open1}
-        value={value1}
-        items={items}
-        setOpen={setOpen1}
-        setValue={setValue1}
-        setItems={setItems}
-      />
-
-      <DropDownPicker
-        containerStyle={[
-          styles.drop,
-          {
-            width: width / 1.5,
-          },
-        ]}
-        open={open2}
-        value={value2}
-        items={items}
-        setOpen={setOpen2}
-        setValue={setValue2}
-        setItems={setItems}
-      />
+      {/* <Picker
+          prompt="Categories"
+          style={{ height: 150 }}
+          selectedValue={value}
+          onValueChange={(itemValue) => {
+            console.log(value);
+            setValue(itemValue);
+          }}
+        > */}
+      {/* {cat1.length > 0 && (
+            <Picker.Item label={cat1[0].label} value={cat1[0].value} />
+          )} */}
+      {/* {ar.length > 0 && (
+            <Picker.Item label={ar[0].label} value={ar[0].value} />
+          )} */}
+      {/* {items &&
+            items.map((i, key) => (
+              <Picker.Item key={key} label={i.label} value={i.value} />
+            ))}
+        </Picker>
+        <Picker
+          style={{ height: 150 }}
+          prompt="Categories"
+          selectedValue={value1}
+          onValueChange={(itemValue) => setValue1(itemValue)}
+        > */}
+      {/* {cat2.length > 0 && (
+            <Picker.Item label={cat2[0].label} value={cat2[0].value} />
+          )} */}
+      {/* {items &&
+            items.map((i, key) => (
+              <Picker.Item key={key} label={i.label} value={i.value} />
+            ))}
+        </Picker>
+        <Picker
+          style={{ height: 150 }}
+          prompt="Categories"
+          selectedValue={value2}
+          onValueChange={(itemValue) => setValue2(itemValue)}
+        > */}
+      {/* {cat3.length > 0 && (
+            <Picker.Item label={cat3[0].label} value={cat3[0].value} />
+          )} */}
+      {/* {items &&
+            items.map((i, key) => (
+              <Picker.Item key={key} label={i.label} value={i.value} />
+            ))}
+        </Picker>
+      </ScrollView>
+      <TouchableOpacity style={styles.btn}>
+        <Text style={styles.buttonText}>Done</Text>
+      </TouchableOpacity> */}
     </View>
   );
 };
@@ -201,61 +277,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  logo: {
-    width: 305,
-    height: 159,
-    alignSelf: "center",
-    marginBottom: 20,
-  },
-  instructions: {
-    color: "#888",
-    fontSize: 18,
-    marginHorizontal: 15,
-    marginBottom: 10,
-  },
   button: {
     marginTop: "5%",
     alignSelf: "center",
     padding: 20,
     borderRadius: 5,
   },
+  btn: {
+    marginBottom: "6%",
+    marginTop: "3%",
+    alignSelf: "center",
+    padding: 15,
+    width: 100,
+    borderRadius: 5,
+    backgroundColor: "blue",
+  },
   pic: { borderRadius: 200, borderColor: "#05336a", borderWidth: 2 },
   buttonText: {
-    fontSize: 20,
+    fontSize: 15,
     color: "#fff",
     textAlign: "center",
   },
   contain: { marginTop: "5%", alignItems: "center" },
   drop: { alignSelf: "center", marginTop: "20%" },
-  commandButton: {
-    padding: 15,
-    borderRadius: 10,
-    backgroundColor: "#FF6347",
-    alignItems: "center",
-    marginTop: 10,
-  },
-  panel: {
-    padding: 20,
-    backgroundColor: "#FFFFFF",
-    paddingTop: 20,
-    // borderTopLeftRadius: 20,
-    // borderTopRightRadius: 20,
-    // shadowColor: '#000000',
-    // shadowOffset: {width: 0, height: 0},
-    // shadowRadius: 5,
-    // shadowOpacity: 0.4,
-  },
-  header: {
-    backgroundColor: "#FFFFFF",
-    shadowColor: "#333333",
-    shadowOffset: { width: -1, height: -3 },
-    shadowRadius: 2,
-    shadowOpacity: 0.4,
-    // elevation: 5,
-    paddingTop: 20,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-  },
   headerC: {
     backgroundColor: "#fddeaf",
     justifyContent: "flex-end",
@@ -264,58 +308,5 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 20,
     marginBottom: "5%",
-  },
-  panelHeader: {
-    alignItems: "center",
-  },
-  panelHandle: {
-    width: 40,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: "#00000040",
-    marginBottom: 10,
-  },
-  panelTitle: {
-    fontSize: 27,
-    height: 35,
-  },
-  panelSubtitle: {
-    fontSize: 14,
-    color: "gray",
-    height: 30,
-    marginBottom: 10,
-  },
-  panelButton: {
-    padding: 13,
-    borderRadius: 10,
-    backgroundColor: "#FF6347",
-    alignItems: "center",
-    marginVertical: 7,
-  },
-  panelButtonTitle: {
-    fontSize: 17,
-    fontWeight: "bold",
-    color: "white",
-  },
-  action: {
-    flexDirection: "row",
-    marginTop: 10,
-    marginBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#f2f2f2",
-    paddingBottom: 5,
-  },
-  actionError: {
-    flexDirection: "row",
-    marginTop: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#FF0000",
-    paddingBottom: 5,
-  },
-  textInput: {
-    flex: 1,
-    marginTop: Platform.OS === "ios" ? 0 : -12,
-    paddingLeft: 10,
-    color: "#05375a",
   },
 });

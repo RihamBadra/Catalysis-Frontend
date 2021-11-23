@@ -3,12 +3,12 @@ import { ScrollView, StyleSheet, Text } from "react-native";
 
 export default function Overview({ info }) {
   return (
-    <ScrollView style={styles.overview} bounces={false}>
+    <ScrollView style={styles.overview}>
       <Text>{info.overview}</Text>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  overview: { flex: 1, paddingHorizontal: "5%", paddingTop: "5%" },
+  overview: { flex: 1, padding: "5%" },
 });
