@@ -159,6 +159,7 @@ export default function Feed({ navigation }) {
                   }}
                 />
               </View>
+
               <View
                 style={[
                   styles.flatList,

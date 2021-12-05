@@ -289,7 +289,7 @@ export default function Cat({ navigation }) {
             }
           }}
         >
-          <Text style={{color:"white"}}>{stat}</Text>
+          <Text style={{ color: "white" }}>{stat}</Text>
         </View>
 
         <View
@@ -297,7 +297,7 @@ export default function Cat({ navigation }) {
             height: 40,
             width: `${33.34 * perc.length}%`,
             backgroundColor: "#002F67",
-            borderRadius: 20
+            borderRadius: 20,
           }}
         ></View>
       </View>

@@ -9,6 +9,13 @@ import {
 import LottieView from "lottie-react-native";
 
 export default function Loading2({ navigation }) {
+  const closeActivityIndicator = () =>
+    setTimeout(() => {
+      navigation.navigate("Home");
+    }, 5000);
+
+  useEffect(() => closeActivityIndicator());
+
   return (
     <View style={styles.container}>
       <Text
@@ -17,7 +24,7 @@ export default function Loading2({ navigation }) {
           fontSize: 28,
           color: "#004E96",
           textAlign: "center",
-          marginBottom:10,
+          marginBottom: 10,
         }}
       >
         Your feed is set you are ready to go!
@@ -49,9 +56,3 @@ const styles = StyleSheet.create({
     height: 50,
   },
 });
-{
-  /* <View style={{ flex: 1, justifyContent: "center" }}>
-       <Text style={{ fontWeight: 'bold',paddingBottom:"15%",fontSize:28,color:"#004E96",textAlign:"center"}}>
-       We are setting up 
-your feed ... </Text> */
-}

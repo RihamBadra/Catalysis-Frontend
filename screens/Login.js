@@ -38,11 +38,12 @@ export default function Login({ props, navigation }) {
       const data = await res.json();
       await AsyncStorage.setItem("token", data.access_token);
       await AsyncStorage.setItem("user", JSON.stringify(data.user.id));
-      navigation.navigate("Home");
+      // navigation.navigate("Home");
     } catch (e) {
       console.log("error", e);
     }
-    navigation.navigate("Home");
+    // navigation.navigate("Home");
+    navigation.navigate("Welcome");
   };
 
   return (
@@ -80,7 +81,6 @@ export default function Login({ props, navigation }) {
             await login();
             setEmail("");
             setPassword("");
-            // navigation.navigate("Welcome");
           }}
           style={styles.button}
         >
